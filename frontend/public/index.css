@@ -1,0 +1,33 @@
+:root {
+  --clr-brand-h: 14;
+  --clr-brand-s: 96%;
+  --clr-brand-l: 71%;
+  --clr-brand: hsl(var(--clr-brand-h), var(--clr-brand-s), var(--clr-brand-l));
+
+  --clr-white: white;
+  --clr-surface: #1D3354;
+  --clr-surface-alt: #356D97;
+  --clr-background: #162241;
+  --clr-waves-bright: #173665;
+
+  --fnt-brand: 'Roboto', sans-serif;
+}
+
+*, html {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  color-scheme: dark;
+  font-family: var(--fnt-brand);
+  background: var(--clr-background);
+  color: var(--white);
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
