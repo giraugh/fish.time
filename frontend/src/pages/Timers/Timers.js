@@ -1,5 +1,6 @@
 const Timers = () => {
-  return <>⏰</>
+  return <main>
+  </main>
 }
 
 export default Timers

@@ -4,6 +4,7 @@ import { setup } from 'goober'
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
 
 import * as Pages from './pages'
+import { Sidebar } from '/src/components'
 
 // Set up goober to use React
 setup(
@@ -15,6 +16,7 @@ setup(
 
 render(
   <BrowserRouter>
+    <Sidebar />
     <Routes>
       <Route path="/" element={<Pages.Timers />} />
       <Route path="*" element={<h1>404! Oh no!</h1>} />
