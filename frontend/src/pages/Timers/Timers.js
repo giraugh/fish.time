@@ -1,10 +1,13 @@
 import { Play } from 'lucide-react'
 
+import { Waves } from '/src/components'
+
 import { Main, TimeEntryForm, TimeEntrySection } from './timersStyle'
 
 const Timers = () => {
   return <Main>
     <TimeEntry />
+    <Waves />
   </Main>
 }
 
@@ -15,7 +18,7 @@ const TimeEntry = () => {
     </TimeEntrySection>
     <TimeEntrySection $square>
       <button>
-        <Play size={60} />
+        <Play size={50} />
       </button>
     </TimeEntrySection>
   </TimeEntryForm>

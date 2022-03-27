@@ -4,7 +4,7 @@ export const Nav = styled('nav')`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 5.5em;
+  width: 4.5em;
 
   background: var(--clr-surface);
 
@@ -30,6 +30,16 @@ export const Nav = styled('nav')`
       --icon-clr: var(--clr-surface);
     }
   }
+
+  @media screen and (max-width: 650px) {
+    flex-direction: row;
+    width: inherit;
+    height: 4.5em;
+
+    a, img {
+      height: 100%;
+    }
+  }
 `
 
 export const SidebarTab = styled(`div`)`
@@ -40,4 +50,8 @@ export const SidebarTab = styled(`div`)`
   font-size: 2rem;
   width: 100%;
   aspect-ratio: 1 / 1;
+
+  @media screen and (max-width: 550px) {
+    height: 100%;
+  }
 `

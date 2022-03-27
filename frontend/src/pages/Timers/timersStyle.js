@@ -2,14 +2,16 @@ import { styled } from 'goober'
 
 export const Main = styled('main')`
   padding: 1em;
+  position: relative;
+  overflow: hidden;
 `
 
 export const TimeEntryForm = styled('div')`
   display: grid;
   grid-template-columns: auto min-content;
-  column-gap: .5em;
+  column-gap: 1em;
   width: 100%;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: var(--clr-white);
 
   &:not(:first-child) {
