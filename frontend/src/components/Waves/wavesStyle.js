@@ -7,6 +7,10 @@ export const Svg = styled('svg', forwardRef)`
   left: 0;
   width: 100%;
   height: min-content;
+  
+  @media (max-width: 650px) {
+    bottom: -30px;
+  }
 `
 
 export const WavesContainer = styled('g')`

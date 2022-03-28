@@ -1,13 +1,16 @@
 import { useRef, useCallback, useEffect, useState } from 'react'
 
+import { useTimerStore } from '/src/stores'
 import { Svg, WavesContainer } from './wavesStyle'
 
 const WAVE_HEIGHT = 100
 const SHOW_DEBUG = false
+const WAVE_COUNT = 4
 
 const Waves = () => {
   const svgRef = useRef()
   const [pageWidth, setPageWidth] = useState(0)
+  const timerActive = useTimerStore(s => s.timerActive)
 
   const handleWindowResize = useCallback(e => {
     if (svgRef.current) {
@@ -21,14 +24,12 @@ const Waves = () => {
     return () => window.removeEventListener('resize', handleWindowResize)
   }, [])
   
-  // Number of waves on the screen
-  const waveCount = 4
-
   // We find points along the width of the page
   // and then alternate whether they are up or down
-  const wavePoints = Array.from({ length: waveCount + 1 })
-    .map((_, i) => ({ x: (pageWidth / waveCount) * i, y: WAVE_HEIGHT / 2 }))
+  const wavePoints = Array.from({ length: WAVE_COUNT + 1 })
+    .map((_, i) => ({ x: (pageWidth / WAVE_COUNT) * i, y: WAVE_HEIGHT / 2 }))
 
+  // Calculate path of the wave
   let path = `M${wavePoints[0].x} ${wavePoints[0].y}` +
              `Q${wavePoints[0].x + wavePoints[1].x / 2} ${0} ${wavePoints[1].x} ${wavePoints[1].y}` +
              wavePoints.slice(2).map(p => `T${p.x} ${p.y}`).join(' ') +
@@ -42,7 +43,7 @@ const Waves = () => {
           <stop offset="80%" stopColor="var(--clr-background)" />
         </linearGradient>
       </defs>
-      <WavesContainer $active={true}>
+      <WavesContainer $active={timerActive}>
         <path d={path} fill="url(#wave-gradient)" />
         {SHOW_DEBUG && wavePoints.map((p,i) => <circle cx={p.x} cy={p.y} r={3} fill="yellow" key={i} />)}
       </WavesContainer>

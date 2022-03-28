@@ -51,7 +51,7 @@ export const SidebarTab = styled(`div`)`
   width: 100%;
   aspect-ratio: 1 / 1;
 
-  @media screen and (max-width: 550px) {
+  @media screen and (max-width: 650px) {
     height: 100%;
   }
 `

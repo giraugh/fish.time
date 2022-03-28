@@ -6,12 +6,27 @@ export const Main = styled('main')`
   overflow: hidden;
 `
 
+export const TimeHeading = styled('h3')`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 0.3em 0.3em;
+  font-size: 6.5rem;
+  color: var(--clr-white);
+  font-weight: normal;
+
+  @media (max-width: 650px) {
+    font-size: 4.5rem;
+    padding: 0.2em 0.3em;
+  }
+`
+
 export const TimeEntryForm = styled('div')`
   display: grid;
   grid-template-columns: auto min-content;
   column-gap: 1em;
   width: 100%;
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: var(--clr-white);
 
   &:not(:first-child) {
