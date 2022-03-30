@@ -58,6 +58,7 @@ export const TimeEntrySection = styled('div')`
     --clr-icon: var(--clr-brand);
     background: none;
     border: none;
+    display: flex;
 
     svg {
       stroke: var(--clr-icon);
@@ -67,6 +68,13 @@ export const TimeEntrySection = styled('div')`
     &:hover {
       cursor: pointer;
       --clr-icon: hsl(var(--clr-brand-h), 100%, 80%);
+    }
+  }
+
+  button[disabled] {
+    --clr-icon: var(--clr-surface);
+    svg {
+      stroke: var(--clr-background);
     }
   }
 

@@ -33,6 +33,7 @@ const Timers = () => {
 }
 
 const TimeEntry = () => {
+  const [taskValue, setTaskValue] = useState('')
   const timerActive = useTimerStore(s => s.timerActive)
   const start = useTimerStore(s => s.start)
   const stop = useTimerStore(s => s.stop)
@@ -48,7 +49,11 @@ const TimeEntry = () => {
 
   return <TimeEntryForm>
     <TimeEntrySection>
-      <input type='text' placeholder={'What\'s Happening?'}/>
+      <input
+        value={taskValue}
+        onChange={e => setTaskValue(e.target.value)}
+        type='text'
+        placeholder={'What\'s Happening?'}/>
     </TimeEntrySection>
     <TimeEntrySection $square>
       <button onClick={handleTimerButton}>
