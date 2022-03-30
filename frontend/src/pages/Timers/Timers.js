@@ -5,6 +5,7 @@ import duration from 'dayjs/plugin/duration'
 
 import { Waves } from '/src/components'
 import { useTimerStore } from '/src/stores'
+import { startTimer, stopTimer } from '/src/services/timers'
 
 import { Main, TimeEntryForm, TimeEntrySection, TimeHeading } from './timersStyle'
 
@@ -38,12 +39,13 @@ const TimeEntry = () => {
   const start = useTimerStore(s => s.start)
   const stop = useTimerStore(s => s.stop)
 
-  const handleTimerButton = useCallback(() => {
+  const handleTimerButton = useCallback(async () => {
     if (!timerActive) {
       start()
+      await startTimer()
     } else {
-      // TODO: record timer
       stop()
+      await stopTimer({ projectID: null, tagIDs: [] })
     }
   }, [timerActive])
 
