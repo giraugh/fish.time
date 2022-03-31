@@ -1,6 +1,6 @@
 import { instance } from './'
 
-export const startTimer = async ({ startTime = new Date() }) => {
+export const startTimer = async ({ startTime = new Date() }={}) => {
   // TODO: post to api w/ current time
   // no timer details are communicated at this point
 }

@@ -7,6 +7,7 @@
   --clr-white: white;
   --clr-surface: #1D3354;
   --clr-surface-alt: #356D97;
+  --clr-surface-dark: #1a2d4c;
   --clr-background: #162241;
   --clr-waves-bright: #173665;
 
@@ -26,11 +27,13 @@ html, body {
   font-family: var(--fnt-brand);
   background: var(--clr-background);
   color: var(--white);
+  min-width: 350px;
 }
 
 #app {
   display: flex;
   min-height: 100vh;
+  min-width: 350px;
 }
 
 @media screen and (max-width: 650px) {
