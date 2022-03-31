@@ -1,5 +1,5 @@
 import { useRef, useState, useCallback } from 'react'
-import { Play, Square, Briefcase, Tag } from 'lucide-react'
+import { Play, Square, Box, Tag } from 'lucide-react'
 
 import { useTimerStore } from '/src/stores'
 import { SelectDropDown } from '/src/components'
@@ -8,7 +8,6 @@ import { startTimer, stopTimer } from '/src/services/timers'
 import { TimeEntryForm, TimerButton, TimeEntrySection, DropDownContainer } from './timeEntryStyle'
 
 const TimeEntry = () => {
-  const [hasFocus, setHasFocus] = useState(false)
   const [taskValue, setTaskValue] = useState('')
   const timerActive = useTimerStore(s => s.timerActive)
   const start = useTimerStore(s => s.start)
@@ -25,18 +24,14 @@ const TimeEntry = () => {
   }, [timerActive])
 
   return <TimeEntryForm>
-    <TimeEntrySection
-      onFocus={() => setHasFocus(true)}
-      onBlur={() => setHasFocus(false)}
-    >
+    <TimeEntrySection>
       <input
         value={taskValue}
         onChange={e => setTaskValue(e.target.value)}
         type='text'
         placeholder={'What\'s Happening?'}/>
-      <DropDownContainer $hasFocus={hasFocus}>
+      <DropDownContainer>
         <ProjectDropDown />
-        <TagDropDown />
       </DropDownContainer>
     </TimeEntrySection>
     <TimeEntrySection $square>
@@ -48,14 +43,8 @@ const TimeEntry = () => {
 }
 
 const ProjectDropDown = () => <SelectDropDown
-  icon={<Briefcase size={35} />}
+  icon={<Box size={35} />}
   label='Project'
-/>
-
-const TagDropDown = () => <SelectDropDown
-  icon={<Tag size={35} />}
-  label='Tags'
-  multiple
 />
 
 export default TimeEntry

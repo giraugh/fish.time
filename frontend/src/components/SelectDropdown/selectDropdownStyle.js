@@ -28,7 +28,7 @@ export const Container = styled('button')`
     }
   `}
 
-  ${p => p.$set && p.$showValue && `
+  ${p => p.$set && `
     gap: .4em;
     padding: .4em 1em;
     aspect-ratio: initial;
@@ -42,38 +42,8 @@ export const Container = styled('button')`
       stroke: var(--clr-white);
     }
   }
-
-  @media (max-width: 650px) {
-    align-items: center;
-    justify-content: center;
-    gap: .3em;
-    padding: .4em .8em;
-    aspect-ratio: initial;
-    border-radius: calc(2 * var(--border-radius));
-
-    svg {
-      width: 1rem;
-      height: 1rem;
-    }
-  }
-`
-
-export const Label = styled('span')`
-  display: none;
-
-  @media (max-width: 650px) {
-    display: inline;
-
-    ${p => p.$hide && `
-      display: none;
-    `}
-  }
 `
 
 export const Value = styled('span')`
   font-size: 1.2rem;
-
-  @media (max-width: 650px) {
-    font-size: 1rem;
-  }
 `

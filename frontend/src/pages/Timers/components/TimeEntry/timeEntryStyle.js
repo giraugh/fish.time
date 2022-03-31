@@ -64,40 +64,10 @@ export const TimeEntrySection = styled('div')`
     justify-content: center;
     aspect-ratio: 1 / 1;
   `}
-
-  ${p => !p.$square && `
-    @media (max-width: 650px) {
-      flex-direction: column;
-      align-items: start;
-      justify-content: center;
-      min-height: 4em;
-      height: auto;
-      gap: .1em;
-    }
-  `}
 `
 
 export const DropDownContainer = styled('div')`
   display: flex;
   flex-direction: row;
   gap: .5em;
-
-  @media (max-width: 650px) {
-    width: 100%;
-    height: 0;
-    padding: .5em;
-    padding-top: 0;
-    padding-bottom: 0;
-    background-color: var(--clr-surface-dark);
-    align-items: center;
-    overflow: hidden;
-    border-radius: var(--border-radius);
-    transition: height .1s, padding .1s, margin-bottom .1s;
-
-    ${p => p.$hasFocus && `
-      height: 2.5em;
-      padding: .5em;
-      margin-bottom: .5em;
-    `}
-  }
 `

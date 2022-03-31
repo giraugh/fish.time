@@ -1,15 +1,22 @@
 /* TODO: Element w/ a little square that has a search select style dropdown */
 import { useState } from 'react'
 
-import { Container, Label, Value } from './selectDropdownStyle'
+import { Container, Value } from './selectDropdownStyle'
 
-const SelectDropDown = ({ label='', icon=null, multiple=false }) => {
-  const [value, setValue] = useState('')
+const SelectDropDown = ({ icon=null }) => {
+  const [value, setValue] = useState(null)
 
-  return <Container $set={value} $showValue={!multiple} onClick={() => setValue(multiple ? ['Test', 'Test'] : 'Test')}>
+  const handleOpen = () => {
+    if (value) {
+      setValue(null)
+    } else {
+      setValue('Test')
+    }
+  }
+
+  return <Container $set={value} onClick={handleOpen}>
     {icon}
-    <Label $hide={value && !multiple}>{value && multiple ? `(${value.length})` : ''} {label}</Label>
-    {!multiple && <Value>{value}</Value>}
+    <Value>{value}</Value>
   </Container>
 }
 
