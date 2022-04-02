@@ -1,0 +1,21 @@
+{
+  "name": "fish-time-backend",
+  "version": "1.0.0",
+  "description": "Backend for Fish.Time",
+  "main": "app.js",
+  "author": "Ewan Breakey",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon ./app.js --exec babel-node -e js,mjs,json,graphql"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.8",
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.11",
+    "nodemon": "^2.0.15"
+  }
+}
