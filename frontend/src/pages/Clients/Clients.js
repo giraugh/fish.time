@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
-import { MoreVertical } from 'lucide-react'
 import { getClients } from '/src/services'
-import { ScrollContainer, DetailButton } from '/src/components'
+import { Spinner, ScrollContainer, DetailButton } from '/src/components'
 
 import {
   Container,
@@ -14,14 +13,16 @@ import {
 } from './clientsStyle'
 
 const Clients = () => {
+  const [isLoading, setIsLoading] = useState(true)
   const [clients, setClients] = useState([])
 
   useEffect(() => {
     getClients()
       .then(setClients)
+      .then(() => setIsLoading(false))
   }, [])
 
-  return <Container>
+  return isLoading ? <Spinner /> : <Container>
     <HeadingContainer>
       <Heading>Clients</Heading>
       <Button>New Client</Button>

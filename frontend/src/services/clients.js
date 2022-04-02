@@ -1,6 +1,7 @@
 import { instance } from './'
 
 export const getClients = async () => {
+  await new Promise(res => window.setTimeout(res, 300))
   return [{
     id: 'c-abc',
     name: 'Sample Client 1',

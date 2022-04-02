@@ -6,7 +6,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import updateLocale from 'dayjs/plugin/updateLocale'
 
 import { getProjects } from '/src/services'
-import { DetailButton, ScrollContainer, GroupedRows } from '/src/components'
+import { Spinner, DetailButton, ScrollContainer, GroupedRows } from '/src/components'
 
 import {
   Container,
@@ -42,33 +42,33 @@ dayjs.updateLocale('en', {
 })
 
 const Projects = () => {
+  const [isLoading, setIsLoading] = useState(true)
   const [projects, setProjects] = useState([])
 
   useEffect(() => {
     getProjects()
       .then(setProjects)
+      .then(() => setIsLoading(false))
   }, [])
 
   const projectGroups = Array.from(new Set(projects.map(p => p.clientID)))
     .map(clientID => [clientID, projects.filter(p => p.clientID === clientID)])
 
-  return <>
-    <Container>
-      <HeadingContainer>
-        <Heading>Projects</Heading>
-        <Button>New Project</Button>
-      </HeadingContainer>  
-      <ScrollContainer>
-        <ProjectGroupList>
-          <HelpText>{!projects?.length && 'No projects here yet!'}</HelpText>
-          {projectGroups.map(([clientID, projects]) => <ProjectGroup
-            key={clientID}
-            clientID={clientID}
-            projects={projects}/>)}
-        </ProjectGroupList>
-      </ScrollContainer>
-    </Container>
-  </>
+  return isLoading ? <Spinner /> : <Container>
+    <HeadingContainer>
+      <Heading>Projects</Heading>
+      <Button>New Project</Button>
+    </HeadingContainer>  
+    <ScrollContainer>
+      <ProjectGroupList>
+        <HelpText>{!projects?.length && 'No projects here yet!'}</HelpText>
+        {projectGroups.map(([clientID, projects]) => <ProjectGroup
+          key={clientID}
+          clientID={clientID}
+          projects={projects}/>)}
+      </ProjectGroupList>
+    </ScrollContainer>
+  </Container>
 }
 
 const ProjectGroup = ({ clientID, projects }) => {
