@@ -14,18 +14,25 @@ setup(
   props => Object.keys(props).forEach(p => p[0] === '$' && delete props[p])
 )
 
+const App = () => <>
+  <Navbar />
+  <Main>
+    <Routes>
+      <Route path="/" element={<Pages.Timers />} />
+      <Route path="/projects" element={<Pages.Projects />} />
+      <Route path="*" element={<h1>404! Oh no!</h1>} />
+    </Routes>
+    <Waves />
+    <TimerDuration />
+  </Main>
+</>
+
 render(
   <BrowserRouter>
-    <Navbar />
-    <Main>
-      <Routes>
-        <Route path="/" element={<Pages.Timers />} />
-        <Route path="/projects" element={<Pages.Projects />} />
-        <Route path="*" element={<h1>404! Oh no!</h1>} />
-      </Routes>
-      <Waves />
-      <TimerDuration />
-    </Main>
+    <Routes>
+      <Route path="/app/*" element={<App />} />
+      <Route path="*" element={<Pages.Home />} />
+    </Routes>
   </BrowserRouter>,
   document.getElementById('app')
 )

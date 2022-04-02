@@ -7,12 +7,12 @@ const WAVE_HEIGHT = 100
 const SHOW_DEBUG = false
 const WAVE_COUNT = 4
 
-const Waves = () => {
+const Waves = ({ active = false }) => {
   const svgRef = useRef()
   const [pageWidth, setPageWidth] = useState(0)
   const timerActive = useTimerStore(s => s.timerActive)
 
-  const handleWindowResize = useCallback(e => {
+  const handleWindowResize = useCallback(() => {
     if (svgRef.current) {
       setPageWidth(svgRef.current.getBoundingClientRect().width * 2)
     }
@@ -37,16 +37,16 @@ const Waves = () => {
              `L${0} ${WAVE_HEIGHT * 2}`
 
   return <Svg width={pageWidth} height={3 * WAVE_HEIGHT} ref={svgRef}>
-      <defs>
-        <linearGradient id="wave-gradient" gradientTransform="rotate(90)">
-          <stop offset="5%" stopColor="var(--clr-waves-bright)" />
-          <stop offset="80%" stopColor="var(--clr-background)" />
-        </linearGradient>
-      </defs>
-      <WavesContainer $active={timerActive}>
-        <path d={path} fill="url(#wave-gradient)" />
-        {SHOW_DEBUG && wavePoints.map((p,i) => <circle cx={p.x} cy={p.y} r={3} fill="yellow" key={i} />)}
-      </WavesContainer>
+    <defs>
+      <linearGradient id="wave-gradient" gradientTransform="rotate(90)">
+        <stop offset="5%" stopColor="var(--clr-waves-bright)" />
+        <stop offset="80%" stopColor="var(--clr-background)" />
+      </linearGradient>
+    </defs>
+    <WavesContainer $active={timerActive || active}>
+      <path d={path} fill="url(#wave-gradient)" />
+      {SHOW_DEBUG && wavePoints.map((p,i) => <circle cx={p.x} cy={p.y} r={3} fill="yellow" key={i} />)}
+    </WavesContainer>
   </Svg>
 }
 
