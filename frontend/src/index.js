@@ -1,10 +1,10 @@
 import { render } from 'react-dom'
 import { createElement } from 'react'
 import { setup } from 'goober'
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import * as Pages from './pages'
-import { Navbar } from '/src/components'
+import { Navbar, Main, Waves, TimerDuration } from '/src/components'
 
 // Set up goober to use React
 setup(
@@ -17,10 +17,15 @@ setup(
 render(
   <BrowserRouter>
     <Navbar />
-    <Routes>
-      <Route path="/" element={<Pages.Timers />} />
-      <Route path="*" element={<h1>404! Oh no!</h1>} />
-    </Routes>
+    <Main>
+      <Routes>
+        <Route path="/" element={<Pages.Timers />} />
+        <Route path="/projects" element={<Pages.Projects />} />
+        <Route path="*" element={<h1>404! Oh no!</h1>} />
+      </Routes>
+      <Waves />
+      <TimerDuration />
+    </Main>
   </BrowserRouter>,
   document.getElementById('app')
 )

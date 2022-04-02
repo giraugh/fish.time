@@ -1,4 +1,4 @@
-import { ScrollContainer } from './timerListStyle'
+import { ScrollContainer } from '/src/components'
 
 const TimerList = () => {
   return <ScrollContainer>

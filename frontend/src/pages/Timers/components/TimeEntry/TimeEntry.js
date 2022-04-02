@@ -1,9 +1,9 @@
-import { useRef, useState, useCallback } from 'react'
-import { Play, Square, Box, Tag } from 'lucide-react'
+import { useState, useCallback } from 'react'
+import { Play, Square, Box } from 'lucide-react'
 
 import { useTimerStore } from '/src/stores'
 import { SelectDropDown } from '/src/components'
-import { startTimer, stopTimer } from '/src/services/timers'
+import { startTimer, stopTimer } from '/src/services'
 
 import { TimeEntryForm, TimerButton, TimeEntrySection, DropDownContainer } from './timeEntryStyle'
 
