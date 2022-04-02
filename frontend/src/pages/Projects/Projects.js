@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { MoreVertical } from 'lucide-react'
+import { MoreVertical, User, Users } from 'lucide-react'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -17,6 +17,7 @@ import {
   ProjectRow,
   DetailButton,
   ProjectName,
+  HelpText,
 } from './projectsStyle'
 
 dayjs.extend(duration)
@@ -60,6 +61,7 @@ const Projects = () => {
       </HeadingContainer>  
       <ScrollContainer>
         <ProjectGroupList>
+          <HelpText>{!projects?.length && 'No projects here yet!'}</HelpText>
           {projectGroups.map(([clientID, projects]) => <ProjectGroup
             key={clientID}
             clientID={clientID}
@@ -76,12 +78,15 @@ const ProjectGroup = ({ clientID, projects }) => {
   </GroupedRows>
 }
 
-const Project = ({ name, timerDuration }) => {
-  const duration = dayjs.duration(timerDuration, 'minutes').humanize()
+const Project = ({ name, totalDuration, isShared }) => {
+  const duration = dayjs.duration(totalDuration, 'minutes').humanize()
 
   return <GroupedRows.Row>
     <ProjectRow>
-      <ProjectName>{name}</ProjectName>
+      <ProjectName>
+        {isShared ? <Users size={45} /> : <User size={45} />}
+        {name}
+      </ProjectName>
       <span>{duration}</span>
       <DetailButton><MoreVertical size={40}/></DetailButton>
     </ProjectRow>

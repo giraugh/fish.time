@@ -5,17 +5,20 @@ export const getProjects = async () => {
     id: 'p-abc',
     name: 'Sample Project 1',
     clientID: 'c-abc',
-    timerDuration: 60 * 10
+    totalDuration: 60 * 10,
+    isShared: false,
   }, {
     id: 'p-def',
     name: 'Sample Project 2',
     clientID: 'c-abc',
-    timerDuration: 30,
+    totalDuration: 30,
+    isShared: true,
   }, {
     id: 'p-ghi',
-    name: 'Sampe Project 3',
+    name: 'Sample Project 3',
     clientID: 'c-dfe',
-    timerDuration: 60 * 24 * 3,
+    totalDuration: 60 * 24 * 3,
+    isShared: true,
   }]
 }
 

@@ -21,9 +21,9 @@ export const GroupTitle = styled('span')`
 
 export const RowContainer = styled('div')`
   display: flex;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   width: 100%;
-  padding: 1em;
+  padding: .5em .8em;
 
   color: var(--clr-white);
 `
