@@ -30,38 +30,31 @@ export const Button = styled('button')`
   padding: 1em;
 `
 
-export const ProjectGroupList = styled('div')`
-
-`
-
-export const ProjectRow = styled('div')`
-  display: grid;
-  grid-template-columns: 2fr 1fr auto;
-  align-items: center;
-  width: 100%;
-  text-align: left;
-
-  :first-child {
-    padding-right: 1em;
-  }
-
-  @media (max-width: 650px) {
-
-  }
-`
-
-export const ProjectName = styled('span')`
-  display: flex;
-  align-items: center;
-  gap: .2em;
-  font-weight: bold;
-`
-
-export const ShareSpan = styled('span')``
-
 export const HelpText = styled('span')`
   font-size: 1.1rem;
   color: var(--clr-white);
   opacity: .6;
   font-style: italic;
+`
+
+export const ClientCard = styled('div')`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0em 1em;
+  font-size: 1.4rem;
+  min-width: 14em;
+  height: 3em;
+
+  background: var(--clr-surface);
+  color: var(--clr-white);
+  border-radius: var(--border-radius);
+`
+
+export const ClientListContainer = styled('div')`
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5em;
+  width: 100%;
+  padding-top: .5em;
 `

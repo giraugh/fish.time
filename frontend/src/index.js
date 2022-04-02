@@ -20,6 +20,7 @@ const App = () => <>
     <Routes>
       <Route path="/" element={<Pages.Timers />} />
       <Route path="/projects" element={<Pages.Projects />} />
+      <Route path="/clients" element={<Pages.Clients />} />
       <Route path="*" element={<h1>404! Oh no!</h1>} />
     </Routes>
     <Waves />

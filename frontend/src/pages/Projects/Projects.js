@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
-import { MoreVertical, User, Users } from 'lucide-react'
+import { User, Users } from 'lucide-react'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import updateLocale from 'dayjs/plugin/updateLocale'
 
 import { getProjects } from '/src/services'
-import { ScrollContainer, GroupedRows } from '/src/components'
+import { DetailButton, ScrollContainer, GroupedRows } from '/src/components'
 
 import {
   Container,
@@ -15,7 +15,6 @@ import {
   Button,
   ProjectGroupList,
   ProjectRow,
-  DetailButton,
   ProjectName,
   HelpText,
 } from './projectsStyle'
@@ -88,7 +87,7 @@ const Project = ({ name, totalDuration, isShared }) => {
         {name}
       </ProjectName>
       <span>{duration}</span>
-      <DetailButton><MoreVertical size={40}/></DetailButton>
+      <DetailButton />
     </ProjectRow>
   </GroupedRows.Row>
 }
