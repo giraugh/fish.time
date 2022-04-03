@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
-import { User, Users } from 'lucide-react'
+import { User, Users, MoreVertical } from 'lucide-react'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import updateLocale from 'dayjs/plugin/updateLocale'
 
 import { getProjects } from '/src/services'
-import { Spinner, DetailButton, ScrollContainer, GroupedRows } from '/src/components'
+import { Spinner, IconButton, ScrollContainer, GroupedRows } from '/src/components'
 
 import {
   Container,
@@ -60,8 +60,8 @@ const Projects = () => {
       <Button>New Project</Button>
     </HeadingContainer>  
     <ScrollContainer>
+      <HelpText>{!projects?.length && 'No projects here yet!'}</HelpText>
       <ProjectGroupList>
-        <HelpText>{!projects?.length && 'No projects here yet!'}</HelpText>
         {projectGroups.map(([clientID, projects]) => <ProjectGroup
           key={clientID}
           clientID={clientID}
@@ -83,11 +83,11 @@ const Project = ({ name, totalDuration, isShared }) => {
   return <GroupedRows.Row>
     <ProjectRow>
       <ProjectName>
-        {isShared ? <Users size={45} /> : <User size={45} />}
+        {isShared ? <Users size={35} /> : <User size={35} />}
         {name}
       </ProjectName>
       <span>{duration}</span>
-      <DetailButton />
+      <IconButton icon={<MoreVertical />} size={35} />
     </ProjectRow>
   </GroupedRows.Row>
 }

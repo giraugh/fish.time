@@ -2,10 +2,10 @@ import { useState, useCallback } from 'react'
 import { Play, Square, Box } from 'lucide-react'
 
 import { useTimerStore } from '/src/stores'
-import { SelectDropDown } from '/src/components'
+import { SelectDropDown, IconButton } from '/src/components'
 import { startTimer, stopTimer } from '/src/services'
 
-import { TimeEntryForm, TimerButton, TimeEntrySection, DropDownContainer } from './timeEntryStyle'
+import { TimeEntryForm, TimeEntrySection, DropDownContainer } from './timeEntryStyle'
 
 const TimeEntry = () => {
   const [taskValue, setTaskValue] = useState('')
@@ -35,9 +35,11 @@ const TimeEntry = () => {
       </DropDownContainer>
     </TimeEntrySection>
     <TimeEntrySection $square>
-      <TimerButton onClick={handleTimerButton}>
-        { timerActive ? <Square size={50} /> : <Play size={50} /> }
-      </TimerButton>
+      <IconButton
+        filled
+        icon={timerActive ? <Square /> : <Play />}
+        size={50}
+        onClick={handleTimerButton} />
     </TimeEntrySection>
   </TimeEntryForm>
 }

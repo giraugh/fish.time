@@ -13,10 +13,12 @@ export const Group = styled('div')`
   `}
 `
 
-export const GroupTitle = styled('span')`
-  color: white;
-  font-size: 1.3rem;
+export const GroupTitle = styled('div')`
+  color: var(--clr-white);
+  font-size: 1rem;
   padding-left: 1em;
+  opacity: .8;
+  padding-bottom: .2em;
 `
 
 export const RowContainer = styled('div')`

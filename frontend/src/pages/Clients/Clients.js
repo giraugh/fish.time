@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
+import { MoreVertical } from 'lucide-react'
+
 import { getClients } from '/src/services'
-import { Spinner, ScrollContainer, DetailButton } from '/src/components'
+import { Spinner, ScrollContainer, IconButton } from '/src/components'
 
 import {
   Container,
@@ -39,7 +41,7 @@ const Clients = () => {
 const Client = ({ name }) => {
   return <ClientCard>
     {name}
-    <DetailButton />
+    <IconButton icon={<MoreVertical />} size={40} />
   </ClientCard>
 }
 

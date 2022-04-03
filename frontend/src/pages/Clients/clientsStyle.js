@@ -42,6 +42,7 @@ export const ClientCard = styled('div')`
   align-items: center;
   justify-content: space-between;
   padding: 0em 1em;
+  padding-right: .5em;
   font-size: 1.4rem;
   min-width: 14em;
   height: 3em;

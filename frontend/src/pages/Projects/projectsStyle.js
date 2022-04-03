@@ -31,7 +31,10 @@ export const Button = styled('button')`
 `
 
 export const ProjectGroupList = styled('div')`
-
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  padding-top: 1em;
 `
 
 export const ProjectRow = styled('div')`
@@ -41,7 +44,7 @@ export const ProjectRow = styled('div')`
   width: 100%;
   text-align: left;
 
-  :first-child {
+  > :first-child {
     padding-right: 1em;
   }
 
@@ -53,7 +56,7 @@ export const ProjectRow = styled('div')`
 export const ProjectName = styled('span')`
   display: flex;
   align-items: center;
-  gap: .2em;
+  gap: 1em;
   font-weight: bold;
 `
 
