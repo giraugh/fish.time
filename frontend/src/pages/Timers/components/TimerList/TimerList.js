@@ -6,6 +6,7 @@ import calendar from 'dayjs/plugin/calendar'
 
 import { ScrollContainer, Spinner, GroupedRows, IconButton } from '/src/components'
 import { getTimers } from '/src/services'
+import { usePreferenceStore } from '/src/stores'
 
 import { TimerRow, TimerGroupList } from './timerListStyle'
 
@@ -30,12 +31,9 @@ const TimerList = () => {
       .then(() => setIsLoading(false))
   }, [])
 
-  const timersByDay = groupBy(
-    timers,
+  const timersByDay = groupBy(timers,
     t => dayjs(t.startTime).startOf('day').calendar(null, calendarConfig)
   )
-
-  console.log(timersByDay)
 
   return isLoading ? <Spinner /> : <ScrollContainer>
     <TimerGroupList>
@@ -54,9 +52,9 @@ const TimerGroup = ({ day, timers }) => {
 }
 
 const Timer = ({ startTime, endTime, description }) => {
-  const use12HourFormat = true
+  const use12HourTime = usePreferenceStore(s => s.use12HourTime)
   const formatTime = date =>
-    dayjs(date).format(use12HourFormat ? 'hh:mm a' : 'HH:mm')
+    dayjs(date).format(use12HourTime ? 'hh:mm a' : 'HH:mm')
 
   return <GroupedRows.Row>
     <TimerRow>
