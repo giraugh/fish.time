@@ -8,7 +8,7 @@ import { ScrollContainer, Spinner, GroupedRows, IconButton } from '/src/componen
 import { getTimers } from '/src/services'
 import { usePreferenceStore } from '/src/stores'
 
-import { TimerRow, TimerGroupList } from './timerListStyle'
+import { TimerRow, TimerGroupList, TimerProject } from './timerListStyle'
 
 dayjs.extend(calendar)
 
@@ -25,19 +25,23 @@ const TimerList = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [timers, setTimers] = useState([])
 
+  // Get timers from service
   useEffect(() => {
     getTimers()
       .then(setTimers)
       .then(() => setIsLoading(false))
   }, [])
 
-  const timersByDay = groupBy(timers,
-    t => dayjs(t.startTime).startOf('day').calendar(null, calendarConfig)
-  )
+  // Group timers by day, sort chronologically, humanize/format dates
+  const timersByDay = Object.entries(groupBy(timers,
+    t => dayjs(t.startTime).startOf('day').toString()
+  ))
+    .sort(([da], [db]) => dayjs(db).isBefore(da) ? -1 : 1)
+    .map(([date, entries]) => [dayjs(date).calendar(null, calendarConfig), entries])
 
   return isLoading ? <Spinner /> : <ScrollContainer>
     <TimerGroupList>
-      {Object.entries(timersByDay).map(([day, timers]) => <TimerGroup
+      {timersByDay.map(([day, timers]) => <TimerGroup
         key={day}
         day={day}
         timers={timers} />)}
@@ -51,7 +55,7 @@ const TimerGroup = ({ day, timers }) => {
   </GroupedRows>
 }
 
-const Timer = ({ startTime, endTime, description }) => {
+const Timer = ({ startTime, endTime, description, projectID }) => {
   const use12HourTime = usePreferenceStore(s => s.use12HourTime)
   const formatTime = date =>
     dayjs(date).format(use12HourTime ? 'hh:mm a' : 'HH:mm')
@@ -59,6 +63,7 @@ const Timer = ({ startTime, endTime, description }) => {
   return <GroupedRows.Row>
     <TimerRow>
       <span>{description}</span>
+      <TimerProject>{projectID}</TimerProject>
       <span>{formatTime(startTime)} - {formatTime(endTime)}</span>
       <div>
         <IconButton icon={<MoreVertical />} subtle size={35} />
