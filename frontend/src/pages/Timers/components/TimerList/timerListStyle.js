@@ -8,12 +8,8 @@ export const TimerRow = styled('div')`
   width: 100%;
   text-align: left;
 
-  > :first-child {
-    padding-right: 1em;
-  }
-
   @media (max-width: 650px) {
-    padding: .5em;
+    padding-block: .4em;
   }
 `
 
@@ -32,10 +28,14 @@ export const TitleSection = styled('div')`
   align-items: center;
 
   @media (max-width: 650px) {
-    grid-template-columns: 1fr;
-    grid-template-rows: max-content max-content;
-    max-width: 250px;
-    overflow-x: scroll;
+    grid-template-columns: 12ch max-content;
+
+    ${p => p.$active && `
+      grid-template-columns: 1fr;
+      grid-template-rows: max-content max-content;
+      max-width: 250px;
+      overflow-x: scroll;
+    `}
   }
 `
 
@@ -57,4 +57,29 @@ export const Tag = styled('span')`
   ${p => p.$color && `
     color: ${p.$color};
   `}
+
+  ${p => p.$isCount && `
+    display: none;
+    color: var(--clr-surface-alt);
+  `}
+
+  @media (max-width: 650px) {
+    ${p => !(p.$always || p.$isCount) && `
+      display: none;
+    `}
+    ${p => p.$isCount && `
+      display: inline;
+    `} 
+  }
+`
+
+export const TimesSection = styled('div')`
+  display: flex;
+  gap: .7ch;
+
+  @media (max-width: 650px) {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+  }
 `

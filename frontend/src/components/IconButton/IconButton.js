@@ -1,10 +1,11 @@
 import { styled } from 'goober'
 import { MoreVertical } from 'lucide-react'
 
-const IconButton = ({ icon = <MoreVertical/>, filled = false, size = '50px', subtle = false, ...props }) =>
+const IconButton = ({ icon = <MoreVertical/>, filled = false, size = '50px', subtle = false, hideIfSmall, ...props }) =>
   <Button
     $filled={filled}
     $subtle={subtle}
+    $hideIfSmall={hideIfSmall}
     $size={typeof size === 'number' ? `${size}px` : size}
     {...props}>
     {icon}
@@ -50,6 +51,12 @@ const Button = styled('button')`
       }
     }
   `}
+
+  @media (max-width: 650px) {
+    ${p => p.$hideIfSmall && `
+      display: none; 
+    `}
+  }
 `
 
 export default IconButton

@@ -10,7 +10,7 @@ import { GET_MY_TIMERS_QUERY } from '/src/graphql/queries'
 import { ScrollContainer, Spinner, GroupedRows, IconButton } from '/src/components'
 import { usePreferenceStore } from '/src/stores'
 
-import { TimerRow, Tags, TimerGroupList, Tag, TitleSection } from './timerListStyle'
+import { TimerRow, Tags, TimerGroupList, Tag, TitleSection, TimesSection } from './timerListStyle'
 
 dayjs.extend(calendar)
 
@@ -63,13 +63,18 @@ const Timer = ({ startTime, endTime, description, project }) => {
       <TitleSection>
         <span>{descriptionWithoutTags}</span>
         <Tags>
-          <Tag $color={projectColors[project.id % projectColors.length]}>{project?.name}</Tag>
+          <Tag $always={true} $color={projectColors[project.id % projectColors.length]}>{project?.name}</Tag>
           {tags.map(t => <Tag key={t}>{t}</Tag>)}
+          <Tag $isCount={true}>+{tags.length}</Tag>
         </Tags>
       </TitleSection>
-      <span>{formatTime(startTime)} - {formatTime(endTime)}</span>
+      <TimesSection>
+        <span>{formatTime(startTime)}</span>
+        {' - '}
+        <span>{formatTime(endTime)}</span>
+      </TimesSection>
       <div>
-        <IconButton icon={<MoreVertical />} subtle size={35} />
+        <IconButton hideIfSmall={true} icon={<MoreVertical />} subtle size={35} />
         <IconButton icon={<Play />} filled subtle size={35} />
       </div>
     </TimerRow>
