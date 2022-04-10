@@ -24,8 +24,7 @@ export const Tag = styled('span')`
   width: max-content;
   padding: .2em .8em;
   font-size: .7rem;
-  word-break: break-all;
-  max-width: 80px;
+  max-width: 120px;
   text-overflow: ellipsis;
   overflow-x: hidden;
 
