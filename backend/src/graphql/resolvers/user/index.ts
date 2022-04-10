@@ -10,9 +10,17 @@ export const userQueries = {
 
 export const User = {
   projects: async (parent: DBUser, { isOwner }: { isOwner: boolean }) =>
-    client.user
-      .findUnique({ where: { id: parent?.id } })
-      .projects({ where: { isOwner } }),
+    client.project
+      .findMany({
+        where: {
+          users: {
+            some: {
+              isOwner: isOwner ?? undefined,
+              userID: parent.id,
+            }
+          }
+        }
+      }),
   clients: async (parent: DBUser) =>
     client.user
       .findUnique({ where: { id: parent?.id }})
@@ -24,7 +32,7 @@ export const User = {
           project: {
             users: {
               some: {
-                isOwner,
+                isOwner: isOwner ?? undefined,
                 userID: parent?.id
               }
             }

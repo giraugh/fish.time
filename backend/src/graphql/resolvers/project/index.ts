@@ -14,13 +14,17 @@ export const Project = {
     client.project
       .findUnique({ where: { id: parent.id } })
       .client(),
+  timers: async (parent: DBProject) =>
+    client.project
+      .findUnique({ where: { id: parent.id } })
+      .timers(),
   totalDuration: (parent: DBProject) =>
     client.timer
     .findMany({
       where: { project: { id: parent.id } }
     })
     .then(projects => projects
-      .map(p => dayjs(p.startTime).diff(p.endTime, 'second'))
+      .map(p => dayjs(p.endTime).diff(p.startTime, 'second'))
       .reduce((a, b) => a + b, 0)
     )
 }

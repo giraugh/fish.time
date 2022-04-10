@@ -17,5 +17,5 @@ export const Timer = {
   duration: (parent: DBTimer) =>
     client.timer
     .findUnique({ where: { id: parent.id } })
-    .then(timer => dayjs(timer?.startTime).diff(timer?.endTime, 'second'))
+    .then(timer => dayjs(timer?.endTime).diff(timer?.startTime, 'second'))
 }

@@ -15,6 +15,7 @@ type Project {
   name: String!
   client: Client
   totalDuration: Float! # The total duration of all associated timers (in seconds)
+  timers: [Timer!]!
 }
 
 input CreateProjectInput {
