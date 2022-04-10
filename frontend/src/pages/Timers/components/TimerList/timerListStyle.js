@@ -16,14 +16,18 @@ export const TimerGroupList = styled('div')`
 
 export const Tags = styled('div')`
   display: flex;
+  align-items: center;
   gap: .25em;
 `
 
 export const Tag = styled('span')`
   width: max-content;
   padding: .2em .8em;
-  font-size: .8rem;
+  font-size: .7rem;
   word-break: break-all;
+  max-width: 80px;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
 
   color: lightgreen;
   border-radius: calc(2 * var(--border-radius));
@@ -64,5 +68,15 @@ export const ButtonsSection = styled('div')`
   @media (max-width: 650px) {
     flex: 1;
     justify-content: end;
+  }
+`
+
+export const Description = styled('span')`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media (max-width: 650px) {
+    font-size: .9rem;
   }
 `
