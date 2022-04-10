@@ -50,7 +50,10 @@ const Projects = () => {
     return <Spinner />
 
   const projectGroups = Array.from(new Set((projects ?? []).map(p => p.client?.id)))
-    .map(clientID => [clientID, projects.filter(p => p?.clientID === clientID)])
+    .map(clientID => [
+      projects.find(p => p.client?.id === clientID)?.client?.name || 'No Client',
+      projects.filter(p => p?.client?.id === clientID)
+    ])
 
   return <Container>
     <HeadingContainer>
@@ -60,17 +63,17 @@ const Projects = () => {
     <ScrollContainer>
       <HelpText>{!projects?.length && 'No projects here yet!'}</HelpText>
       <ProjectGroupList>
-        {projectGroups.map(([clientID, projects]) => <ProjectGroup
-          key={clientID}
-          clientID={clientID}
+        {projectGroups.map(([clientName, projects]) => <ProjectGroup
+          key={clientName}
+          clientName={clientName}
           projects={projects}/>)}
       </ProjectGroupList>
     </ScrollContainer>
   </Container>
 }
 
-const ProjectGroup = ({ clientID, projects }) => {
-  return <GroupedRows title={clientID}>
+const ProjectGroup = ({ clientName, projects }) => {
+  return <GroupedRows title={clientName}>
     {projects.map(project => <Project key={project.id} {...project}/>)}
   </GroupedRows>
 }
