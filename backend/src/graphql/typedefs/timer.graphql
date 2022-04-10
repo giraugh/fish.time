@@ -1,0 +1,44 @@
+extend type Query {
+  timer(id: ID!): Timer
+}
+
+extend type Mutation {
+  startNewTimer(input: StartNewTimerInput!): TimerPayload!
+  stopTimer(input: StopTimerInput!): TimerPayload!
+  updateTimer(input: UpdateTimerInput!): TimerPayload!
+  deleteTimer(input: DeleteTimerInput!): TimerPayload!
+}
+
+type TimerPayload { timer: Timer! }
+
+type Timer {
+  id: ID!
+  startTime: String! # ISO8601
+  endTime: String # ISO8601
+  description: String
+  project: Project
+  duration: Float!
+}
+
+input StartNewTimerInput {
+  startTime: String! @constraint(format: "date")
+  description: String
+  projectID: ID
+}
+
+input StopTimerInput {
+  id: ID!
+  endTime: String! @constraint(format: "date")
+}
+
+input UpdateTimerInput {
+  id: ID!
+  startTime: String! @constraint(format: "date")
+  endTime: String! @constraint(format: "date")
+  description: String
+  projectID: ID
+}
+
+input DeleteTimerInput {
+  id: ID!
+}

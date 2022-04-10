@@ -1,0 +1,33 @@
+extend type Query {
+  project(id: ID!): Project!
+}
+
+extend type Mutation {
+  createProject(input: CreateProjectInput!): ProjectPayload!
+  updateProject(input: UpdateProjectInput!): ProjectPayload!
+  deleteProject(input: DeleteProjectInput!): ProjectPayload!
+}
+
+type ProjectPayload { project: Project! }
+
+type Project {
+  id: ID!
+  name: String!
+  client: Client
+  totalDuration: Float! # The total duration of all associated timers (in seconds)
+}
+
+input CreateProjectInput {
+  name: String!
+  clientID: ID!
+}
+
+input UpdateProjectInput {
+  id: ID!
+  name: String
+  clientID: ID
+}
+
+input DeleteProjectInput {
+  id: ID!
+}
