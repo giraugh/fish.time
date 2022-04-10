@@ -17,12 +17,7 @@ const userData: Prisma.UserCreateInput[] = [
   {
     id: 'test-user-1',
     displayName: 'Test User 1',
-    clients: {
-      create: [{
-        id: 1,
-        name: 'Test Client 1',
-      }]
-    }
+    clients: {}
   }
 ]
 
@@ -31,15 +26,16 @@ const projectData: Prisma.ProjectCreateInput[] = [
     name: 'Chores',
     users: {
       create: {
-        user: { connect: { id: 'test-user-0' }} 
+        userID: 'test-user-0'
       }
     },
   },
   {
     name: 'Assignments',
+    client: { connect: { id: 0 }},
     users: {
       create: {
-        user: { connect: { id: 'test-user-0' }}
+        userID: 'test-user-0'
       }
     }
   },
@@ -47,7 +43,7 @@ const projectData: Prisma.ProjectCreateInput[] = [
     name: 'Other Stuff',
     users: {
       create: {
-        user: { connect: { id: 'test-user-1' } }
+        userID: 'test-user-1'
       }
     }
   }
