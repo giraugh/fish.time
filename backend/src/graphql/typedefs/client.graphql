@@ -1,5 +1,5 @@
 extend type Query {
-  client(id: ID!): Client
+  client(id: Int!): Client
   myClients: [Client!]!
 }
 
@@ -12,7 +12,7 @@ extend type Mutation {
 type ClientPayload { client: Client! }
 
 type Client {
-  id: ID!
+  id: Int!
   name: String!
   projects: [Project!]!
 }
@@ -22,10 +22,10 @@ input CreateClientInput {
 }
 
 input UpdateClientInput {
-  id: ID!
+  id: Int!
   name: String
 }
 
 input DeleteClientInput {
-  id: ID!
+  id: Int!
 }

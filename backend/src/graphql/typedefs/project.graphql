@@ -1,5 +1,5 @@
 extend type Query {
-  project(id: ID!): Project!
+  project(id: Int!): Project!
   myProjects: [Project!]! # Projects of authenticated user
 }
 
@@ -13,7 +13,7 @@ extend type Mutation {
 type ProjectPayload { project: Project! }
 
 type Project {
-  id: ID!
+  id: Int!
   name: String!
   client: Client
   totalDuration: Float! # The total duration of all associated timers (in seconds)
@@ -23,20 +23,20 @@ type Project {
 
 input CreateProjectInput {
   name: String!
-  clientID: ID!
+  clientID: Int!
 }
 
 input UpdateProjectInput {
-  id: ID!
+  id: Int!
   name: String
-  clientID: ID
+  clientID: Int
 }
 
 input DeleteProjectInput {
-  id: ID!
+  id: Int!
 }
 
 input ShareProjectInput {
-  id: ID!
+  id: Int!
   userID: ID!
 }
