@@ -14,8 +14,8 @@ type TimerPayload { timer: Timer! }
 
 type Timer {
   id: Int!
-  startTime: String! # ISO8601
-  endTime: String # ISO8601
+  startTime: DateTime!
+  endTime: DateTime
   description: String
   project: Project
   duration: Float!

@@ -2,6 +2,7 @@ import { join } from 'path'
 import { readdirSync, readFileSync } from 'fs'
 import { makeExecutableSchema } from '@graphql-tools/schema'
 import { constraintDirective, constraintDirectiveTypeDefs } from 'graphql-constraint-directive'
+import { DateTimeResolver } from 'graphql-scalars'
 
 import resolvers from './resolvers'
 
@@ -15,7 +16,7 @@ const schemaText = gqlFiles
 // Create schema
 let schema = makeExecutableSchema({
   typeDefs: [constraintDirectiveTypeDefs, schemaText],
-  resolvers,
+  resolvers: {...resolvers, DateTime: DateTimeResolver },
 })
 
 // Add directives
