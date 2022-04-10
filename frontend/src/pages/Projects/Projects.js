@@ -5,7 +5,6 @@ import duration from 'dayjs/plugin/duration'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import updateLocale from 'dayjs/plugin/updateLocale'
 
-import { getProjects } from '/src/services'
 import { Spinner, IconButton, ScrollContainer, GroupedRows } from '/src/components'
 
 import {
@@ -46,9 +45,9 @@ const Projects = () => {
   const [projects, setProjects] = useState([])
 
   useEffect(() => {
-    getProjects()
+    /*getProjects()
       .then(setProjects)
-      .then(() => setIsLoading(false))
+      .then(() => setIsLoading(false))*/
   }, [])
 
   const projectGroups = Array.from(new Set(projects.map(p => p.clientID)))

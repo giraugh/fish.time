@@ -2,12 +2,12 @@ const env = process.env.REACT_APP_BUILD_ENV || 'development'
 
 const config = {
   development: {
-    baseURL: 'http://localhost:3000',
-    apiAddress: 'http://localhost:3001',
+    BASE_URL: 'http://localhost:3000',
+    API: 'http://localhost:6001/graphql'
   },
   production: {
-    baseURL: '',
-    apiAddress: ''
+    BASE_URL: '',
+    API: ''
   }
 }
 

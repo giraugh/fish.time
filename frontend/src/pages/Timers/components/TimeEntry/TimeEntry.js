@@ -3,7 +3,6 @@ import { Play, Square, Box } from 'lucide-react'
 
 import { useTimerStore } from '/src/stores'
 import { SelectDropDown, IconButton } from '/src/components'
-import { startTimer, stopTimer } from '/src/services'
 
 import { TimeEntryForm, TimeEntrySection, DropDownContainer } from './timeEntryStyle'
 
@@ -16,10 +15,10 @@ const TimeEntry = () => {
   const handleTimerButton = useCallback(async () => {
     if (!timerActive) {
       start()
-      await startTimer()
+      //await startTimer()
     } else {
       stop()
-      await stopTimer({ projectID: null, tagIDs: [] })
+      //await stopTimer({ projectID: null, tagIDs: [] })
     }
   }, [timerActive])
 

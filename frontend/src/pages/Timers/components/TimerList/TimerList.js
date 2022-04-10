@@ -5,7 +5,6 @@ import dayjs from 'dayjs'
 import calendar from 'dayjs/plugin/calendar'
 
 import { ScrollContainer, Spinner, GroupedRows, IconButton } from '/src/components'
-import { getTimers } from '/src/services'
 import { usePreferenceStore } from '/src/stores'
 
 import { TimerRow, TimerGroupList, TimerProject } from './timerListStyle'
@@ -27,9 +26,9 @@ const TimerList = () => {
 
   // Get timers from service
   useEffect(() => {
-    getTimers()
+    /*getTimers()
       .then(setTimers)
-      .then(() => setIsLoading(false))
+      .then(() => setIsLoading(false))*/
   }, [])
 
   // Group timers by day, sort chronologically, humanize/format dates
