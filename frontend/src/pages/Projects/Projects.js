@@ -5,6 +5,7 @@ import duration from 'dayjs/plugin/duration'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import updateLocale from 'dayjs/plugin/updateLocale'
 
+import { projectColors } from '/src/utils/colors'
 import { Spinner, IconButton, ScrollContainer, GroupedRows } from '/src/components'
 import { GET_MY_PROJECTS_QUERY } from '/src/graphql/queries'
 
@@ -74,12 +75,12 @@ const ProjectGroup = ({ clientID, projects }) => {
   </GroupedRows>
 }
 
-const Project = ({ name, totalDuration, isShared }) => {
+const Project = ({ id, name, totalDuration, isShared }) => {
   const duration = dayjs.duration(totalDuration, 'seconds').humanize()
 
   return <GroupedRows.Row>
     <ProjectRow>
-      <ProjectName>
+      <ProjectName $color={projectColors[id % projectColors.length]}>
         {isShared ? <Users size={35} /> : <User size={35} />}
         {name}
       </ProjectName>

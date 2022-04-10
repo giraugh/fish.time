@@ -58,6 +58,10 @@ export const ProjectName = styled('span')`
   align-items: center;
   gap: 1em;
   font-weight: bold;
+
+  ${p => p.$color && `
+    color: ${p.$color}; 
+  `}
 `
 
 export const ShareSpan = styled('span')``
