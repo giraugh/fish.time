@@ -9,7 +9,7 @@ import { GET_MY_TIMERS_QUERY } from '/src/graphql/queries'
 import { ScrollContainer, Spinner, GroupedRows, IconButton } from '/src/components'
 import { usePreferenceStore } from '/src/stores'
 
-import { TimerRow, TimerGroupList, TimerProject } from './timerListStyle'
+import { TimerRow, Tags, TimerGroupList, Tag, TitleSection } from './timerListStyle'
 
 dayjs.extend(calendar)
 
@@ -49,15 +49,23 @@ const TimerGroup = ({ day, timers }) => {
   </GroupedRows>
 }
 
-const Timer = ({ startTime, endTime, description, projectID }) => {
+const Timer = ({ startTime, endTime, description, project }) => {
   const use12HourTime = usePreferenceStore(s => s.use12HourTime)
   const formatTime = date =>
     dayjs(date).format(use12HourTime ? 'hh:mm a' : 'HH:mm')
 
+  const descriptionWithoutTags = description.replace(/#\w+/g, '')
+  const tags = description.match(/#(\w+)/g) ?? []
+
   return <GroupedRows.Row>
     <TimerRow>
-      <span>{description}</span>
-      <TimerProject>{projectID}</TimerProject>
+      <TitleSection>
+        <span>{descriptionWithoutTags}</span>
+        <Tags>
+          <Tag>{project?.name}</Tag>
+          {tags.map(t => <Tag key={t}>{t}</Tag>)}
+        </Tags>
+      </TitleSection>
       <span>{formatTime(startTime)} - {formatTime(endTime)}</span>
       <div>
         <IconButton icon={<MoreVertical />} subtle size={35} />
