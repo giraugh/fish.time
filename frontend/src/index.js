@@ -2,9 +2,11 @@ import { render } from 'react-dom'
 import { createElement } from 'react'
 import { setup } from 'goober'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Provider } from 'urql'
 
 import * as Pages from './pages'
 import { Navbar, Main, Waves, TimerDuration } from '/src/components'
+import client from '/src/graphql/client'
 
 // Set up goober to use React
 setup(
@@ -29,12 +31,14 @@ const App = () => <>
 </>
 
 render(
-  <BrowserRouter>
-    <Routes>
-      <Route path="/app/*" element={<App />} />
-      <Route path="*" element={<Pages.Home />} />
-    </Routes>
-  </BrowserRouter>,
+  <Provider value={client}>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/app/*" element={<App />} />
+        <Route path="*" element={<Pages.Home />} />
+      </Routes>
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('app')
 )
 

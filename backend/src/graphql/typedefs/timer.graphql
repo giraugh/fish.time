@@ -1,5 +1,6 @@
 extend type Query {
   timer(id: ID!): Timer
+  myTimers: [Timer!]!
 }
 
 extend type Mutation {

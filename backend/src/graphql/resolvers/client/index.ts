@@ -4,8 +4,10 @@ import client from 'client'
 export { default as clientMutations } from './mutations'
 
 export const clientQueries = {
-  client: async (_parent, { id }) =>
-    client.client.findUnique({ where: { id }})
+  client: async (_parent, { id }, { user }) =>
+    client.client.findFirst({ where: { id, ownerID: user.id }}),
+  myClients: async (_parent, _args, { user }) =>
+    client.client.findMany({ where: { ownerID: user.id }}),
 }
 
 export const Client = {

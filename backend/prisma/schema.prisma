@@ -17,6 +17,7 @@ model User {
   displayName String
   projects    UsersInProject[]
   clients     Client[]
+  timers      Timer[]
 }
 
 model Timer {
@@ -24,8 +25,10 @@ model Timer {
   startTime   DateTime
   endTime     DateTime?
   description String?   @default("")
-  project     Project   @relation(fields: [projectID], references: [id])
-  projectID   Int
+  project     Project?   @relation(fields: [projectID], references: [id])
+  projectID   Int?
+  owner       User      @relation(fields: [ownerID], references: [id])
+  ownerID     String
 }
 
 model UsersInProject {

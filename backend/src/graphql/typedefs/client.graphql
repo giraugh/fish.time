@@ -1,5 +1,6 @@
 extend type Query {
   client(id: ID!): Client
+  myClients: [Client!]!
 }
 
 extend type Mutation {

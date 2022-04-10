@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useQuery } from 'urql'
 import { MoreVertical } from 'lucide-react'
 
+import { GET_MY_CLIENTS_QUERY } from '/src/graphql/queries'
 import { Spinner, ScrollContainer, IconButton } from '/src/components'
 
 import {
@@ -14,16 +15,10 @@ import {
 } from './clientsStyle'
 
 const Clients = () => {
-  const [isLoading, setIsLoading] = useState(true)
-  const [clients, setClients] = useState([])
+  const [{ data, fetching }] = useQuery({ query: GET_MY_CLIENTS_QUERY })
+  const clients = data?.myClients ?? []
 
-  useEffect(() => {
-    /*getClients()
-      .then(setClients)
-      .then(() => setIsLoading(false))*/
-  }, [])
-
-  return isLoading ? <Spinner /> : <Container>
+  return fetching ? <Spinner /> : <Container>
     <HeadingContainer>
       <Heading>Clients</Heading>
       <Button>New Client</Button>

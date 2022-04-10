@@ -6,7 +6,6 @@ import { makeDefaultStorage } from '@urql/exchange-graphcache/default-storage'
 
 import config from '/src/config'
 import { contextExchange } from '/src/utils'
-import { createToken } from '/src/auth'
 
 export const errorExchange = ({ forward }) => ops$ => {
   return pipe(
@@ -17,7 +16,7 @@ export const errorExchange = ({ forward }) => ops$ => {
 
 // Create storage database for offline caching
 export const storage = makeDefaultStorage({
-  idbName: 'stevent-idb',
+  idbName: 'fish-time-idb',
   maxAge: 14,
 })
 
@@ -36,7 +35,7 @@ const client = createClient({
     dedupExchange,
     contextExchange(async ctx => ({
       ...ctx,
-      fetchOptions: { headers: { authorization: await createToken() } } 
+      /* #TODO: fetchOptions: { headers: { authorization: await createToken() } } */
     })),
     errorExchange,
     cacheExchange,

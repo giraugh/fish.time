@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useQuery } from 'urql'
 import { User, Users, MoreVertical } from 'lucide-react'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
@@ -6,6 +6,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import updateLocale from 'dayjs/plugin/updateLocale'
 
 import { Spinner, IconButton, ScrollContainer, GroupedRows } from '/src/components'
+import { GET_MY_PROJECTS_QUERY } from '/src/graphql/queries'
 
 import {
   Container,
@@ -41,19 +42,16 @@ dayjs.updateLocale('en', {
 })
 
 const Projects = () => {
-  const [isLoading, setIsLoading] = useState(true)
-  const [projects, setProjects] = useState([])
+  const [{ data, fetching }] = useQuery({ query: GET_MY_PROJECTS_QUERY })
+  const projects = data?.myProjects ?? []
 
-  useEffect(() => {
-    /*getProjects()
-      .then(setProjects)
-      .then(() => setIsLoading(false))*/
-  }, [])
+  if (fetching)
+    return <Spinner />
 
-  const projectGroups = Array.from(new Set(projects.map(p => p.clientID)))
-    .map(clientID => [clientID, projects.filter(p => p.clientID === clientID)])
+  const projectGroups = Array.from(new Set((projects ?? []).map(p => p.client?.id)))
+    .map(clientID => [clientID, projects.filter(p => p?.clientID === clientID)])
 
-  return isLoading ? <Spinner /> : <Container>
+  return <Container>
     <HeadingContainer>
       <Heading>Projects</Heading>
       <Button>New Project</Button>
@@ -77,7 +75,7 @@ const ProjectGroup = ({ clientID, projects }) => {
 }
 
 const Project = ({ name, totalDuration, isShared }) => {
-  const duration = dayjs.duration(totalDuration, 'minutes').humanize()
+  const duration = dayjs.duration(totalDuration, 'seconds').humanize()
 
   return <GroupedRows.Row>
     <ProjectRow>

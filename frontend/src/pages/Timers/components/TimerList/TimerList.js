@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { Play, MoreVertical } from 'lucide-react'
+import { useQuery } from 'urql'
 import groupBy from 'lodash.groupby'
 import dayjs from 'dayjs'
 import calendar from 'dayjs/plugin/calendar'
 
+import { GET_MY_TIMERS_QUERY } from '/src/graphql/queries'
 import { ScrollContainer, Spinner, GroupedRows, IconButton } from '/src/components'
 import { usePreferenceStore } from '/src/stores'
 
@@ -21,15 +23,8 @@ const calendarConfig = {
 }
 
 const TimerList = () => {
-  const [isLoading, setIsLoading] = useState(true)
-  const [timers, setTimers] = useState([])
-
-  // Get timers from service
-  useEffect(() => {
-    /*getTimers()
-      .then(setTimers)
-      .then(() => setIsLoading(false))*/
-  }, [])
+  const [{ data, fetching }] = useQuery({ query: GET_MY_TIMERS_QUERY })
+  const timers = data?.myTimers
 
   // Group timers by day, sort chronologically, humanize/format dates
   const timersByDay = Object.entries(groupBy(timers,
@@ -38,7 +33,7 @@ const TimerList = () => {
     .sort(([da], [db]) => dayjs(db).isBefore(da) ? -1 : 1)
     .map(([date, entries]) => [dayjs(date).calendar(null, calendarConfig), entries])
 
-  return isLoading ? <Spinner /> : <ScrollContainer>
+  return fetching ? <Spinner /> : <ScrollContainer>
     <TimerGroupList>
       {timersByDay.map(([day, timers]) => <TimerGroup
         key={day}

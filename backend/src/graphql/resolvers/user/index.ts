@@ -4,8 +4,8 @@ import client from 'client'
 export { default as userMutations } from './mutations'
 
 export const userQueries = {
-  user: async (_parent, { id }: { id: string }) =>
-    client.user.findUnique({ where: { id }})
+  user: async (_parent, { id }: { id: string }, { user }) =>
+    user.id === id && client.user.findUnique({ where: { id }})
 }
 
 export const User = {

@@ -15,6 +15,7 @@ CREATE TABLE "Timer" (
     "endTime" TIMESTAMP(3),
     "description" TEXT DEFAULT E'',
     "projectID" INT4 NOT NULL,
+    "ownerID" TEXT NOT NULL,
 
     CONSTRAINT "Timer_pkey" PRIMARY KEY ("id")
 );
@@ -50,6 +51,9 @@ CREATE TABLE "Client" (
 
     CONSTRAINT "Client_pkey" PRIMARY KEY ("id")
 );
+
+-- AddForeignKey
+ALTER TABLE "Timer" ADD CONSTRAINT "Timer_ownerID_fkey" FOREIGN KEY ("ownerID") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Timer" ADD CONSTRAINT "Timer_projectID_fkey" FOREIGN KEY ("projectID") REFERENCES "Project"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
