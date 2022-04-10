@@ -1,16 +1,10 @@
 import { styled } from 'goober'
 
 export const TimerRow = styled('div')`
-  display: grid;
-  grid-template-columns: 1fr max-content auto;
-  column-gap: .5em;
+  display: flex;
   align-items: center;
+  gap: .5em;
   width: 100%;
-  text-align: left;
-
-  @media (max-width: 650px) {
-    padding-block: .4em;
-  }
 `
 
 export const TimerGroupList = styled('div')`
@@ -19,25 +13,6 @@ export const TimerGroupList = styled('div')`
   gap: 2em;
   padding-top: 1em;
 ` 
-
-export const TitleSection = styled('div')`
-  display: grid;
-  grid-template-columns: max-content max-content;
-  row-gap: .5em;
-  column-gap: 1em;
-  align-items: center;
-
-  @media (max-width: 650px) {
-    grid-template-columns: 12ch max-content;
-
-    ${p => p.$active && `
-      grid-template-columns: 1fr;
-      grid-template-rows: max-content max-content;
-      max-width: 250px;
-      overflow-x: scroll;
-    `}
-  }
-`
 
 export const Tags = styled('div')`
   display: flex;
@@ -76,10 +51,18 @@ export const Tag = styled('span')`
 export const TimesSection = styled('div')`
   display: flex;
   gap: .7ch;
+  justify-content: end;
+  flex: 1;
 
   @media (max-width: 650px) {
     display: none;
-    flex-direction: column;
-    align-items: center;
+  }
+`
+
+export const ButtonsSection = styled('div')`
+  display: flex;
+  @media (max-width: 650px) {
+    flex: 1;
+    justify-content: end;
   }
 `

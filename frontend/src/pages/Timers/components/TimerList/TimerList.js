@@ -10,7 +10,7 @@ import { GET_MY_TIMERS_QUERY } from '/src/graphql/queries'
 import { ScrollContainer, Spinner, GroupedRows, IconButton } from '/src/components'
 import { usePreferenceStore } from '/src/stores'
 
-import { TimerRow, Tags, TimerGroupList, Tag, TitleSection, TimesSection } from './timerListStyle'
+import { TimerRow, Tags, TimerGroupList, Tag, TimesSection, ButtonsSection } from './timerListStyle'
 
 dayjs.extend(calendar)
 
@@ -60,23 +60,21 @@ const Timer = ({ startTime, endTime, description, project }) => {
 
   return <GroupedRows.Row>
     <TimerRow>
-      <TitleSection>
-        <span>{descriptionWithoutTags}</span>
-        <Tags>
-          <Tag $always={true} $color={projectColors[project.id % projectColors.length]}>{project?.name}</Tag>
-          {tags.map(t => <Tag key={t}>{t}</Tag>)}
-          <Tag $isCount={true}>+{tags.length}</Tag>
-        </Tags>
-      </TitleSection>
+      <span>{descriptionWithoutTags}</span>
+      <Tags>
+        <Tag $always={true} $color={projectColors[project.id % projectColors.length]}>{project?.name}</Tag>
+        {tags.map(t => <Tag key={t}>{t}</Tag>)}
+        <Tag $isCount={true}>+{tags.length}</Tag>
+      </Tags>
       <TimesSection>
         <span>{formatTime(startTime)}</span>
         {' - '}
         <span>{formatTime(endTime)}</span>
       </TimesSection>
-      <div>
+      <ButtonsSection>
         <IconButton hideIfSmall={true} icon={<MoreVertical />} subtle size={35} />
         <IconButton icon={<Play />} filled subtle size={35} />
-      </div>
+      </ButtonsSection>
     </TimerRow>
   </GroupedRows.Row>
 }
