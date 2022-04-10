@@ -5,6 +5,7 @@ import groupBy from 'lodash.groupby'
 import dayjs from 'dayjs'
 import calendar from 'dayjs/plugin/calendar'
 
+import { projectColors } from '/src/utils/colors'
 import { GET_MY_TIMERS_QUERY } from '/src/graphql/queries'
 import { ScrollContainer, Spinner, GroupedRows, IconButton } from '/src/components'
 import { usePreferenceStore } from '/src/stores'
@@ -62,7 +63,7 @@ const Timer = ({ startTime, endTime, description, project }) => {
       <TitleSection>
         <span>{descriptionWithoutTags}</span>
         <Tags>
-          <Tag>{project?.name}</Tag>
+          <Tag $color={projectColors[project.id % projectColors.length]}>{project?.name}</Tag>
           {tags.map(t => <Tag key={t}>{t}</Tag>)}
         </Tags>
       </TitleSection>

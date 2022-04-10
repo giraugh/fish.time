@@ -53,4 +53,8 @@ export const Tag = styled('span')`
   color: lightgreen;
   border-radius: calc(2 * var(--border-radius));
   background: var(--clr-background);
+
+  ${p => p.$color && `
+    color: ${p.$color};
+  `}
 `
