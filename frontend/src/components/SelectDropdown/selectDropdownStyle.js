@@ -31,11 +31,13 @@ export const Container = styled('button')`
     }
   `}
 
-  ${p => p.$set && `
-    gap: .4em;
-    padding: .4em 1em;
-    aspect-ratio: initial;
-  `}
+  @media (min-width: 650px) {
+    ${p => p.$set && `
+      gap: .4em;
+      padding: .4em 1em;
+      aspect-ratio: initial;
+    `}
+  }
 
   ${p => p.$set ? '&' : '&:hover'} {
     background: var(--clr-surface-alt);
@@ -48,4 +50,8 @@ export const Container = styled('button')`
 
 export const Value = styled('span')`
   font-size: 1.2rem;
+
+  @media (max-width: 650px) {
+    display: none;
+  }
 `
