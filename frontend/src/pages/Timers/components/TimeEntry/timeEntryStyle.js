@@ -43,8 +43,8 @@ export const TimeEntrySection = styled('div')`
   flex-direction: row;
   align-items: center;
   width: 100%;
-  padding: 0em .5em;
   height: 4em;
+  padding: .7em;
 
   background: var(--clr-surface);
   border-radius: var(--border-radius);
@@ -53,8 +53,8 @@ export const TimeEntrySection = styled('div')`
     font-size: inherit;
     background: none;
     border: none;
-    padding: .5em;
     outline: none;
+    padding-inline: .3em;
     flex: 1;
     min-height: 4em;
     width: 100%;
@@ -64,10 +64,4 @@ export const TimeEntrySection = styled('div')`
     justify-content: center;
     aspect-ratio: 1 / 1;
   `}
-`
-
-export const DropDownContainer = styled('div')`
-  display: flex;
-  flex-direction: row;
-  gap: .5em;
 `

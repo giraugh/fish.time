@@ -4,14 +4,17 @@ export const Container = styled('button')`
   display: flex;
   min-width: .5em;
   min-height: .5em;
+  height: 100%;
   padding: .4em;
+  aspect-ratio: 1 / 1;
+  align-items: center;
+  justify-content: center;
+
   border-radius: var(--border-radius);
   border: none;
   color: var(--clr-surface-alt);
   background: none;
   cursor: pointer;
-  aspect-ratio: 1 / 1;
-  align-items: center;
   border: 2px solid transparent;
 
   svg {
@@ -32,7 +35,6 @@ export const Container = styled('button')`
     gap: .4em;
     padding: .4em 1em;
     aspect-ratio: initial;
-    border-radius: calc(2 * var(--border-radius));
   `}
 
   ${p => p.$set ? '&' : '&:hover'} {

@@ -4,7 +4,7 @@ import { Play, Square, Box } from 'lucide-react'
 import { useTimerStore } from '/src/stores'
 import { SelectDropDown, IconButton } from '/src/components'
 
-import { TimeEntryForm, TimeEntrySection, DropDownContainer } from './timeEntryStyle'
+import { TimeEntryForm, TimeEntrySection } from './timeEntryStyle'
 
 const TimeEntry = () => {
   const [taskValue, setTaskValue] = useState('')
@@ -29,9 +29,7 @@ const TimeEntry = () => {
         onChange={e => setTaskValue(e.target.value)}
         type='text'
         placeholder={'What\'s Happening?'}/>
-      <DropDownContainer>
-        <ProjectDropDown />
-      </DropDownContainer>
+      <ProjectDropDown />
     </TimeEntrySection>
     <TimeEntrySection $square>
       <IconButton
