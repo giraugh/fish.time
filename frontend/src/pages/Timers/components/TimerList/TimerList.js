@@ -72,7 +72,7 @@ const Timer = ({ startTime, endTime, description, project }) => {
         <span>{formatTime(endTime)}</span>
       </TimesSection>
       <ButtonsSection>
-        <IconButton hideIfSmall={true} icon={<MoreVertical />} subtle size={35} />
+        <IconButton icon={<MoreVertical />} subtle size={35} />
         <IconButton icon={<Play />} filled subtle size={35} />
       </ButtonsSection>
     </TimerRow>
