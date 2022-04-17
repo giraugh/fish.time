@@ -49,7 +49,7 @@ export const TimeEntrySection = styled('div')`
   background: var(--clr-surface);
   border-radius: var(--border-radius);
 
-  input {
+  > input {
     font-size: inherit;
     background: none;
     border: none;
@@ -58,6 +58,11 @@ export const TimeEntrySection = styled('div')`
     flex: 1;
     min-height: 4em;
     width: 100%;
+    
+    &::placeholder {
+      color: var(--clr-surface-alt);
+      opacity: .75;
+    }
   }
 
   ${p => p.$square && `

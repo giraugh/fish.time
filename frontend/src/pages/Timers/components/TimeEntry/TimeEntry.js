@@ -2,9 +2,10 @@ import { useState, useCallback } from 'react'
 import { Play, Square, Box } from 'lucide-react'
 
 import { useTimerStore } from '/src/stores'
-import { SelectDropDown, IconButton } from '/src/components'
+import { IconButton } from '/src/components'
 
 import { TimeEntryForm, TimeEntrySection } from './timeEntryStyle'
+import { ProjectDropdown } from '../'
 
 const TimeEntry = () => {
   const [taskValue, setTaskValue] = useState('')
@@ -29,7 +30,7 @@ const TimeEntry = () => {
         onChange={e => setTaskValue(e.target.value)}
         type='text'
         placeholder={'What\'s Happening?'}/>
-      <ProjectDropDown />
+      <ProjectDropdown />
     </TimeEntrySection>
     <TimeEntrySection $square>
       <IconButton
@@ -41,9 +42,5 @@ const TimeEntry = () => {
   </TimeEntryForm>
 }
 
-const ProjectDropDown = () => <SelectDropDown
-  icon={<Box size={35} />}
-  label='Project'
-/>
 
 export default TimeEntry

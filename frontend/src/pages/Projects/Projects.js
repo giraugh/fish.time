@@ -1,4 +1,3 @@
-import { useQuery } from 'urql'
 import { User, Users, MoreVertical } from 'lucide-react'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
@@ -7,7 +6,7 @@ import updateLocale from 'dayjs/plugin/updateLocale'
 
 import { projectColors } from '/src/utils/colors'
 import { Spinner, IconButton, ScrollContainer, GroupedRows } from '/src/components'
-import { GET_MY_PROJECTS_QUERY } from '/src/graphql/queries'
+import { useGroupedProjects } from '/src/hooks'
 
 import {
   Container,
@@ -19,6 +18,7 @@ import {
   ProjectName,
   HelpText,
 } from './projectsStyle'
+import { useGroupedProjects } from '../../hooks'
 
 dayjs.extend(duration)
 dayjs.extend(relativeTime)
@@ -43,17 +43,10 @@ dayjs.updateLocale('en', {
 })
 
 const Projects = () => {
-  const [{ data, fetching }] = useQuery({ query: GET_MY_PROJECTS_QUERY })
-  const projects = data?.myProjects ?? []
+  const { projects, projectGroups, fetching } = useGroupedProjects()
 
   if (fetching)
     return <Spinner />
-
-  const projectGroups = Array.from(new Set((projects ?? []).map(p => p.client?.id)))
-    .map(clientID => [
-      projects.find(p => p.client?.id === clientID)?.client?.name || 'No Client',
-      projects.filter(p => p?.client?.id === clientID)
-    ])
 
   return <Container>
     <HeadingContainer>
