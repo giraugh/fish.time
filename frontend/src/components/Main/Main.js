@@ -7,6 +7,10 @@ const Main = styled('main')`
   padding: 1em;
   position: relative;
   overflow: hidden;
+
+  @media (max-width: 650px) {
+    padding: .5em;
+  }
 `
 
 export default Main
