@@ -23,7 +23,7 @@ type Project {
 
 input CreateProjectInput {
   name: String!
-  clientID: Int!
+  clientID: Int
 }
 
 input UpdateProjectInput {

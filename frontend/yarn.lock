@@ -674,6 +674,13 @@
     extract-files "^11.0.0"
     wonka "^4.0.14"
 
+a11y-dialog@^7.1.0:
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/a11y-dialog/-/a11y-dialog-7.4.0.tgz#0641256a17925a61f07ce374db3515177c3cb9c8"
+  integrity sha512-NrLXedddjbIxvapn0ac488DkVuWZjCNxLxHxXPUxjNF7crdHJ4dquPwJ89dV21IPQsXtA5YHNn++Mxouu+ciuQ==
+  dependencies:
+    focusable-selectors "^0.3.1"
+
 abortcontroller-polyfill@^1.1.9:
   version "1.7.3"
   resolved "https://registry.npmjs.org/abortcontroller-polyfill/-/abortcontroller-polyfill-1.7.3.tgz"
@@ -1308,6 +1315,11 @@ flatted@^3.1.0:
   version "3.2.5"
   resolved "https://registry.npmjs.org/flatted/-/flatted-3.2.5.tgz"
   integrity sha512-WIWGi2L3DyTUvUrwRKgGi9TwxQMUEqPOPQBVi71R96jZXJdFskXEmf54BoZaS1kknGODoIGASGEzBUYdyMCBJg==
+
+focusable-selectors@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/focusable-selectors/-/focusable-selectors-0.3.1.tgz#7eacbca8dc6cc8d7f7563e5f5cc3699b91e20aaa"
+  integrity sha512-5JLtr0e1YJIfmnVlpLiG+av07dd0Xkf/KfswsXcei5KmLfdwOysTQsjF058ynXniujb1fvev7nql1x+CkC5ikw==
 
 fs.realpath@^1.0.0:
   version "1.0.0"
@@ -2191,6 +2203,13 @@ punycode@^2.1.0:
   resolved "https://registry.npmjs.org/punycode/-/punycode-2.1.1.tgz"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
+react-a11y-dialog@^6.1.5:
+  version "6.1.5"
+  resolved "https://registry.yarnpkg.com/react-a11y-dialog/-/react-a11y-dialog-6.1.5.tgz#dd9355db1cad592a44fb1e3cc80a9e9b7e834a2c"
+  integrity sha512-m27GkGWPveioXJ/0sqQ24JMuqK/ZWR1tHpDfLy5luZjc9koaebp/kXSZrvczNP/Pjgrj6UAJIhYdH5NDjwg+bQ==
+  dependencies:
+    a11y-dialog "^7.1.0"
+
 react-dom@^17.0.2:
   version "17.0.2"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz"
@@ -2199,6 +2218,11 @@ react-dom@^17.0.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     scheduler "^0.20.2"
+
+react-hook-form@^7.30.0:
+  version "7.30.0"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.30.0.tgz#c9e2fd54d3627e43bd94bf38ef549df2e80c1371"
+  integrity sha512-DzjiM6o2vtDGNMB9I4yCqW8J21P314SboNG1O0obROkbg7KVS0I7bMtwSdKyapnCPjHgnxc3L7E5PEdISeEUcQ==
 
 react-is@^16.13.1:
   version "16.13.1"

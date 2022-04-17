@@ -1,8 +1,8 @@
 import client from 'client'
 
-const createClient = async (_parent, { input: data }) =>
+const createClient = async (_parent, { input: data }, { user }) =>
   client.client
-    .create({ data })
+    .create({ data: { ...data, ownerID: user.id } })
     .then(client => ({ client }))
 
 const updateClient = async (_parent, { input: { id, ...data }}) =>

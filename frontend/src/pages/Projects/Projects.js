@@ -1,24 +1,23 @@
-import { User, Users, MoreVertical } from 'lucide-react'
+import { User, Users, MoreVertical, Plus } from 'lucide-react'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import updateLocale from 'dayjs/plugin/updateLocale'
 
 import { projectColors } from '/src/utils/colors'
-import { Spinner, IconButton, ScrollContainer, GroupedRows } from '/src/components'
+import { Spinner, IconButton, ScrollContainer, GroupedRows, Button, PageHeading } from '/src/components'
 import { useGroupedProjects } from '/src/hooks'
 
+import { CreateProjectModal } from './pages/'
 import {
   Container,
-  HeadingContainer,
   Heading,
-  Button,
   ProjectGroupList,
   ProjectRow,
   ProjectName,
   HelpText,
 } from './projectsStyle'
-import { useGroupedProjects } from '../../hooks'
+import { useGroupedProjects } from '/src/hooks'
 
 dayjs.extend(duration)
 dayjs.extend(relativeTime)
@@ -49,10 +48,11 @@ const Projects = () => {
     return <Spinner />
 
   return <Container>
-    <HeadingContainer>
+    <PageHeading>
       <Heading>Projects</Heading>
-      <Button>New Project</Button>
-    </HeadingContainer>  
+      <Button data-a11y-dialog-show='create-project-dialog' icon={<Plus />}>New Project</Button>
+      <CreateProjectModal />
+    </PageHeading>
     <ScrollContainer>
       <HelpText>{!projects?.length && 'No projects here yet!'}</HelpText>
       <ProjectGroupList>

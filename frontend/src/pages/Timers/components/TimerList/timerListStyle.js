@@ -56,6 +56,7 @@ export const TimesSection = styled('div')`
   gap: .7ch;
   justify-content: end;
   flex: 1;
+  color: var(--clr-surface-alt);
 
   @media (max-width: 650px) {
     display: none;

@@ -11,16 +11,6 @@ export const Container = styled('div')`
   }
 `
 
-export const HeadingContainer = styled('div')`
-  display: flex;
-  gap: 1em;
-
-  h1 {
-    color: var(--clr-white);
-    font-size: 2.5rem;
-  }
-`
-
 export const Heading = styled('h1')``
 
 export const Button = styled('button')`

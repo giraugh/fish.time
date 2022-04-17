@@ -1,7 +1,7 @@
 import { styled } from 'goober'
 import { forwardRef } from 'react'
 
-export const Container = styled('div')`
+export const Container = styled('div', forwardRef)`
   position: relative;
   min-width: .5em;
   min-height: .5em;
@@ -70,18 +70,19 @@ export const Value = styled('span')`
 `
 
 
-export const DropdownContainer = styled('div', forwardRef)`
+export const DropdownContainer = styled('div')`
   position: absolute;
   display: flex;
   flex-direction: column;
   gap: .6em;
   background: var(--clr-surface);
   border: 4px solid var(--clr-surface-alt);
-  padding: 1em;
+  padding: 1.3em 1em;
   top: 115%;
   right: 0;
   border-radius: var(--border-radius);
   z-index: 1;
+  box-shadow: -6px 7px 0px 4px var(--clr-background);
 
   ${p => !p.$isOpen && `
     display: none;
@@ -101,4 +102,9 @@ export const Input = styled('input')`
   padding: 1em;
   min-width: 12em;
   border: none;
+  outline: none;
+
+  &::placeholder {
+    color: var(--clr-surface-alt);
+  }
 ` 

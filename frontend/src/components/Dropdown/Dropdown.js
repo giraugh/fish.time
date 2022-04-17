@@ -15,12 +15,12 @@ const Dropdown = ({ icon=null, value=null, color, children, onClose }) => {
   // Close when clicked outside of 
   useOnClickOutside(containerRef, close)
 
-  return <Container>
+  return <Container ref={containerRef}>
     <DropdownButton $color={color} $set={value} $isOpen={children && isOpen} onClick={() => setIsOpen(!isOpen)}>
       {icon}
       <Value>{value}</Value>
     </DropdownButton>
-    {children && <DropdownContainer ref={containerRef} $isOpen={isOpen}>
+    {children && <DropdownContainer $isOpen={isOpen}>
       {typeof children === 'function' ? children({ close }) : children}
     </DropdownContainer>}
   </Container>

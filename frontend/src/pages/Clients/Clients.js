@@ -1,14 +1,13 @@
 import { useQuery } from 'urql'
-import { MoreVertical } from 'lucide-react'
+import { Plus, MoreVertical } from 'lucide-react'
 
 import { GET_MY_CLIENTS_QUERY } from '/src/graphql/queries'
-import { Spinner, ScrollContainer, IconButton } from '/src/components'
+import { Spinner, ScrollContainer, IconButton, Button, PageHeading } from '/src/components'
 
+import { CreateClientModal } from './pages'
 import {
   Container,
-  HeadingContainer,
   Heading,
-  Button,
   HelpText,
   ClientCard,
   ClientListContainer,
@@ -19,10 +18,11 @@ const Clients = () => {
   const clients = data?.myClients ?? []
 
   return fetching ? <Spinner /> : <Container>
-    <HeadingContainer>
+    <PageHeading>
       <Heading>Clients</Heading>
-      <Button>New Client</Button>
-    </HeadingContainer>  
+      <Button data-a11y-dialog-show='create-client-dialog' icon={<Plus />}>New Client</Button>
+      <CreateClientModal />
+    </PageHeading>  
     <ScrollContainer>
       <HelpText>{!clients?.length && 'No clients here yet!'}</HelpText>
       <ClientListContainer>

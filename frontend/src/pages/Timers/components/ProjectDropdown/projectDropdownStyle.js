@@ -33,5 +33,7 @@ export const ProjectGroup = styled('div')`
     padding-block: 0.2em;
     display: block;
     opacity: .75;
+    color: var(--clr-surface-alt);
+    font-weight: 800;
   }
 `
