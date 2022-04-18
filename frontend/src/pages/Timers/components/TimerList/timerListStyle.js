@@ -77,6 +77,6 @@ export const Description = styled('span')`
   text-overflow: ellipsis;
 
   @media (max-width: 650px) {
-    font-size: .9rem;
+    font-size: 1rem;
   }
 `

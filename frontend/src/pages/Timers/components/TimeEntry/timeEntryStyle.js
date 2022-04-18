@@ -50,7 +50,7 @@ export const TimeEntrySection = styled('div')`
   border-radius: var(--border-radius);
 
   > input {
-    font-size: inherit;
+    font-size: 1.2rem;
     background: none;
     border: none;
     outline: none;

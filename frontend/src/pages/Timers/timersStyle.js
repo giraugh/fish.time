@@ -1,6 +1,6 @@
 import { styled } from 'goober'
 
-export const Main = styled('main')`
+export const Container = styled('div')`
   display: flex;
   flex-direction: column;
   gap: 1em;

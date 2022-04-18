@@ -31,8 +31,11 @@ const TimerList = () => {
   const timersByDay = Object.entries(groupBy(timers,
     t => dayjs(t.startTime).startOf('day').toString()
   ))
-    .sort(([da], [db]) => dayjs(db).isBefore(da) ? -1 : 1)
-    .map(([date, entries]) => [dayjs(date).calendar(null, calendarConfig), entries])
+    .sort(([da], [db]) => dayjs(db).isBefore(da) ? 1 : -1)
+    .map(([date, entries]) => [
+      dayjs(date).calendar(null, calendarConfig),
+      entries.sort((a, b) => dayjs(b).isBefore(a) ? 1 : -1)
+    ])
 
   return fetching ? <Spinner /> : <ScrollContainer>
     <TimerGroupList>
@@ -62,14 +65,15 @@ const Timer = ({ startTime, endTime, description, project }) => {
     <TimerRow>
       <Description>{descriptionWithoutTags}</Description>
       <Tags>
-        <Tag $always={true} $color={projectColors[project.id % projectColors.length]}>{project?.name}</Tag>
+        {project && <Tag $always={true} $color={projectColors[project.id % projectColors.length]}>{project?.name}</Tag>}
         {tags.map(t => <Tag key={t}>{t}</Tag>)}
         {tags.length > 0 && <Tag $isCount={true}>+{tags.length}</Tag>}
       </Tags>
       <TimesSection>
         <span>{formatTime(startTime)}</span>
         {' - '}
-        <span>{formatTime(endTime)}</span>
+        {endTime && <span>{formatTime(endTime)}</span>}
+        {!endTime && <span>Now</span>}
       </TimesSection>
       <ButtonsSection>
         <IconButton icon={<MoreVertical />} subtle size={35} />

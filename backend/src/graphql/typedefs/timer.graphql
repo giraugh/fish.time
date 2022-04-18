@@ -1,13 +1,18 @@
 extend type Query {
   timer(id: Int!): Timer
   myTimers: [Timer!]!
+  myCurrentTimer: Timer
 }
 
 extend type Mutation {
-  startNewTimer(input: StartNewTimerInput!): TimerPayload!
+  startTimer(input: StartTimerInput!): TimerPayload!
   stopTimer(input: StopTimerInput!): TimerPayload!
   updateTimer(input: UpdateTimerInput!): TimerPayload!
   deleteTimer(input: DeleteTimerInput!): TimerPayload!
+}
+
+extend type Subscription {
+  myCurrentTimer: Timer
 }
 
 type TimerPayload { timer: Timer! }
@@ -21,7 +26,7 @@ type Timer {
   duration: Float!
 }
 
-input StartNewTimerInput {
+input StartTimerInput {
   startTime: String! @constraint(format: "date")
   description: String
   projectID: Int
@@ -29,6 +34,8 @@ input StartNewTimerInput {
 
 input StopTimerInput {
   id: Int!
+  description: String
+  projectID: Int
   endTime: String! @constraint(format: "date")
 }
 

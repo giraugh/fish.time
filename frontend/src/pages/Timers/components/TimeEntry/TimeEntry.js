@@ -1,41 +1,36 @@
-import { useState, useCallback } from 'react'
-import { Play, Square, Box } from 'lucide-react'
+import { Play, Square } from 'lucide-react'
 
-import { useTimerStore } from '/src/stores'
 import { IconButton } from '/src/components'
 
 import { TimeEntryForm, TimeEntrySection } from './timeEntryStyle'
 import { ProjectDropdown } from '../'
+import { useCurrentTimer } from '../../hooks'
 
 const TimeEntry = () => {
-  const [taskValue, setTaskValue] = useState('')
-  const timerActive = useTimerStore(s => s.timerActive)
-  const start = useTimerStore(s => s.start)
-  const stop = useTimerStore(s => s.stop)
-
-  const handleTimerButton = useCallback(async () => {
-    if (!timerActive) {
-      start()
-      //await startTimer()
-    } else {
-      stop()
-      //await stopTimer({ projectID: null, tagIDs: [] })
-    }
-  }, [timerActive])
+  const {
+    handleTimerButton,
+    description,
+    setDescription,
+    projectValue,
+    setProjectValue,
+    timerActive,
+    currentTimer
+  } = useCurrentTimer()
 
   return <TimeEntryForm>
     <TimeEntrySection>
       <input
-        value={taskValue}
-        onChange={e => setTaskValue(e.target.value)}
+        value={description}
+        onChange={e => setDescription(e.target.value)}
         type='text'
         placeholder={'What\'s Happening?'}/>
-      <ProjectDropdown />
+      <ProjectDropdown value={projectValue} onChange={setProjectValue} />
     </TimeEntrySection>
     <TimeEntrySection $square>
       <IconButton
         filled
         icon={timerActive ? <Square /> : <Play />}
+        disabled={timerActive && !currentTimer?.id}
         size={50}
         onClick={handleTimerButton} />
     </TimeEntrySection>

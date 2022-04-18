@@ -6,7 +6,6 @@ const Main = styled('main')`
   gap: 1em;
   padding: 1em;
   position: relative;
-  overflow: hidden;
 
   @media (max-width: 650px) {
     padding: .5em;

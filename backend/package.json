@@ -23,7 +23,10 @@
     "express-graphql": "^0.12.0",
     "graphql": "^16.3.0",
     "graphql-constraint-directive": "github:giraugh/graphql-constraint-directive",
-    "graphql-scalars": "^1.17.0"
+    "graphql-scalars": "^1.17.0",
+    "graphql-subscriptions": "^2.0.0",
+    "graphql-ws": "^5.7.0",
+    "ws": "^8.5.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.23",

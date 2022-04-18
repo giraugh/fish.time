@@ -1,7 +1,7 @@
 import { User, userQueries, userMutations } from './user'
 import { Project, projectQueries, projectMutations } from './project'
 import { Client, clientQueries, clientMutations } from './client'
-import { Timer, timerQueries, timerMutations } from './timer'
+import { Timer, timerQueries, timerMutations, timerSubscriptions } from './timer'
 
 const resolvers = {
   Query: {
@@ -15,6 +15,9 @@ const resolvers = {
     ...projectMutations,
     ...clientMutations,
     ...timerMutations,
+  },
+  Subscription: {
+    ...timerSubscriptions,
   },
   User,
   Project,

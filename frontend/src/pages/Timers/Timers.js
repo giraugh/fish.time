@@ -1,14 +1,14 @@
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 
-import { Main } from '/src/components'
+import { Container } from './timersStyle'
 import { TimeEntry, TimerList } from './components'
 
 dayjs.extend(duration)
 
-const Timers = () => <Main>
+const Timers = () => <Container>
   <TimeEntry />
   <TimerList />
-</Main>
+</Container>
 
 export default Timers

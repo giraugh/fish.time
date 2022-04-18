@@ -26,7 +26,7 @@ export const Project = {
       where: { project: { id: parent.id } }
     })
     .then(projects => projects
-      .map(p => dayjs(p.endTime).diff(p.startTime, 'second'))
+      .map(p => p.endTime ? dayjs(p.endTime).diff(p.startTime, 'second') : 0)
       .reduce((a, b) => a + b, 0)
     ),
   isShared: (parent: DBProject) =>

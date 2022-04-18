@@ -36,7 +36,7 @@ const Waves = ({ active = false }) => {
              `L${pageWidth} ${WAVE_HEIGHT * 2}` +
              `L${0} ${WAVE_HEIGHT * 2}`
 
-  return <Svg width={pageWidth} height={3 * WAVE_HEIGHT} ref={svgRef}>
+  return <Svg width={pageWidth} height={3 * WAVE_HEIGHT} ref={svgRef} $active={timerActive}>
     <defs>
       <linearGradient id="wave-gradient" gradientTransform="rotate(90)">
         <stop offset="5%" stopColor="var(--clr-waves-bright)" />

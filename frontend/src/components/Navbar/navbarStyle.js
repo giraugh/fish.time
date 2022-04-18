@@ -5,6 +5,7 @@ export const Nav = styled('nav')`
   flex-direction: column;
   align-items: center;
   width: 4.5em;
+  z-index: 1;
 
   background: var(--clr-surface);
 

@@ -7,8 +7,7 @@ import { useGroupedProjects } from '/src/hooks'
 
 import { ProjectRow, ProjectGroup, GroupContainer } from './projectDropdownStyle'
 
-const ProjectDropdown = () => {
-  const [value, setValue] = useState(null)
+const ProjectDropdown = ({ value=null, onChange }) => {
   const [filter, setFilter] = useState('')
   const { projectGroups } = useGroupedProjects({
     nullGroupName: 'NOCLIENT',
@@ -34,13 +33,13 @@ const ProjectDropdown = () => {
           {clientName === 'NOCLIENT' && <ProjectRow
             $selected={value === null}
             key={null}
-            onClick={() => { setValue(null); close() }} 
+            onClick={() => { onChange(null); close() }} 
             >No Project</ProjectRow>}
           {projects.map(project => <ProjectRow
             key={project.id}
             $selected={value?.id === project?.id}
             $color={projectColors[project.id % projectColors.length]}
-            onClick={() => { setValue(project); close() }}>
+            onClick={() => { onChange(project); close() }}>
               {project.name} 
           </ProjectRow>)} 
         </ProjectGroup>)}
