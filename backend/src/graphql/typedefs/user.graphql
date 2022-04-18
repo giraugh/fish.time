@@ -1,0 +1,33 @@
+extend type Query {
+  user(id: ID!): User
+}
+
+extend type Mutation {
+  createUser(input: CreateUserInput!): UserPayload!
+  updateUser(input: UpdateUserInput!): UserPayload!
+  deleteUser(input: DeleteUserInput!): UserPayload!
+}
+
+type UserPayload { user: User! }
+
+type User {
+  id: ID!
+  displayName: String!
+  projects(isOwner: Boolean): [Project!]!
+  clients: [Client!]!
+  timers: [Timer!]!
+}
+
+input CreateUserInput {
+  id: ID!
+  displayName: String!
+}
+
+input UpdateUserInput {
+  id: ID!
+  displayName: String
+}
+
+input DeleteUserInput {
+  id: ID!
+}

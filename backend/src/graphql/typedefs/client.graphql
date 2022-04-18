@@ -1,0 +1,31 @@
+extend type Query {
+  client(id: Int!): Client
+  myClients: [Client!]!
+}
+
+extend type Mutation {
+  createClient(input: CreateClientInput!): ClientPayload!
+  updateClient(input: UpdateClientInput!): ClientPayload!
+  deleteClient(input: DeleteClientInput!): ClientPayload!
+}
+
+type ClientPayload { client: Client! }
+
+type Client {
+  id: Int!
+  name: String!
+  projects: [Project!]!
+}
+
+input CreateClientInput {
+  name: String!
+}
+
+input UpdateClientInput {
+  id: Int!
+  name: String
+}
+
+input DeleteClientInput {
+  id: Int!
+}

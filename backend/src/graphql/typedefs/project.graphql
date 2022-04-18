@@ -1,0 +1,42 @@
+extend type Query {
+  project(id: Int!): Project!
+  myProjects: [Project!]! # Projects of authenticated user
+}
+
+extend type Mutation {
+  createProject(input: CreateProjectInput!): ProjectPayload!
+  updateProject(input: UpdateProjectInput!): ProjectPayload!
+  deleteProject(input: DeleteProjectInput!): ProjectPayload!
+  shareProject(input: ShareProjectInput!): ProjectPayload!
+}
+
+type ProjectPayload { project: Project! }
+
+type Project {
+  id: Int!
+  name: String!
+  client: Client
+  totalDuration: Float! # The total duration of all associated timers (in seconds)
+  timers: [Timer!]!
+  isShared: Boolean!
+}
+
+input CreateProjectInput {
+  name: String!
+  clientID: Int
+}
+
+input UpdateProjectInput {
+  id: Int!
+  name: String
+  clientID: Int
+}
+
+input DeleteProjectInput {
+  id: Int!
+}
+
+input ShareProjectInput {
+  id: Int!
+  userID: ID!
+}

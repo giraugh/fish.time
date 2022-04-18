@@ -7,8 +7,13 @@
   --clr-white: white;
   --clr-surface: #1D3354;
   --clr-surface-alt: #356D97;
+  --clr-surface-dark: #1a2d4c;
   --clr-background: #162241;
   --clr-waves-bright: #173665;
+  --clr-danger-background: #461616;
+  --clr-danger-color: #b74c4c;
+
+  --border-radius: .5rem;
 
   --fnt-brand: 'Roboto', sans-serif;
 }
@@ -24,10 +29,23 @@ html, body {
   font-family: var(--fnt-brand);
   background: var(--clr-background);
   color: var(--white);
+  min-width: 350px;
 }
 
 #app {
   display: flex;
-  flex-direction: column;
   min-height: 100vh;
+  min-width: 350px;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 650px) {
+  #app {
+    flex-direction: column;
+  }
+}
+
+main {
+  flex: 1;
 }

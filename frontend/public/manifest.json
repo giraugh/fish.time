@@ -1,0 +1,20 @@
+{
+  "short_name": "Time Fish",
+  "name": "Time Fish",
+  "icons": [
+    {
+      "src": "./logo.svg",
+      "type": "image/svg",
+      "sizes": "150x150"
+    },
+    {
+      "src": "./logo.png",
+      "type": "image/png",
+      "sizes": "200x200"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#1D3354",
+  "background_color": "#162241"
+}

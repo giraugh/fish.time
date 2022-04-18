@@ -1,6 +1,6 @@
 {
   "name": "time-fish-frontend",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "React Frontend for Time.Fish",
   "main": "index.js",
   "author": "Ewan Breakey",
@@ -10,15 +10,29 @@
     "start": "parcel public/index.html"
   },
   "devDependencies": {
-    "parcel": "^2.3.2"
+    "@parcel/packager-raw-url": "2.3.2",
+    "@parcel/transformer-webmanifest": "2.3.2",
+    "eslint": "^8.12.0",
+    "eslint-plugin-react": "^7.29.4",
+    "parcel": "^2.3.2",
+    "process": "^0.11.10"
   },
   "dependencies": {
+    "@urql/exchange-graphcache": "^4.3.6",
+    "@urql/exchange-multipart-fetch": "^0.1.14",
     "dayjs": "^1.11.0",
     "goober": "^2.1.8",
+    "graphql": "^16.3.0",
+    "graphql-ws": "^5.7.0",
+    "lodash.groupby": "^4.6.0",
     "lucide-react": "^0.17.13",
+    "prop-types": "^15.8.1",
     "react": "^17.0.2",
+    "react-a11y-dialog": "^6.1.5",
     "react-dom": "^17.0.2",
+    "react-hook-form": "^7.30.0",
     "react-router-dom": "^6.2.2",
+    "urql": "^2.2.0",
     "zustand": "^3.7.1"
   }
 }

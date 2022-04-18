@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <rect id="Artboard1" x="0" y="0" width="100" height="100" style="fill:none;"/>
+    <g id="Artboard11" serif:id="Artboard1">
+        <g id="Design">
+            <g id="Fish" transform="matrix(0.835879,0,0,0.835879,17.8639,7.95447)">
+                <g transform="matrix(1,0,0,1,2.6107,3)">
+                    <path d="M40.669,47.383L16.607,55.394L16.607,39.373L40.669,47.383Z" style="fill:rgb(250,159,130);fill-rule:nonzero;"/>
+                </g>
+                <g transform="matrix(1,0,0,1,2.6107,3)">
+                    <path d="M31.716,47.301L73.684,30.39L73.684,64.212L31.716,47.301Z" style="fill:rgb(255,211,196);fill-rule:nonzero;"/>
+                </g>
+                <g transform="matrix(1,0,0,1,2.6107,3)">
+                    <path d="M31.716,47.301L60.494,35.73L60.494,58.872L31.716,47.301Z" style="fill:rgb(250,159,130);fill-rule:nonzero;"/>
+                </g>
+                <g transform="matrix(1,0,0,1,2.6107,3)">
+                    <ellipse cx="67.689" cy="40.792" rx="3.198" ry="2.741" style="fill:rgb(250,159,130);"/>
+                </g>
+            </g>
+            <g id="Ring">
+                <circle cx="50" cy="50" r="44.907" style="fill:none;stroke:rgb(250,159,130);stroke-opacity:0.98;stroke-width:4px;"/>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String           @id
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  displayName String
+  projects    UsersInProject[]
+  clients     Client[]
+  timers      Timer[]
+}
+
+model Timer {
+  id          Int       @id @default(autoincrement())
+  startTime   DateTime
+  endTime     DateTime?
+  description String?   @default("")
+  project     Project?   @relation(fields: [projectID], references: [id])
+  projectID   Int?
+  owner       User      @relation(fields: [ownerID], references: [id])
+  ownerID     String
+}
+
+model UsersInProject {
+  isOwner   Boolean  @default(false)
+  user      User     @relation(fields: [userID], references: [id])
+  userID    String
+  project   Project  @relation(fields: [projectID], references: [id])
+  projectID Int
+  createdAt DateTime @default(now())
+
+  @@id([userID, projectID])
+}
+
+model Project {
+  id        Int              @id @default(autoincrement())
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  name      String           @db.VarChar(255)
+  client    Client?          @relation(fields: [clientID], references: [id])
+  clientID  Int?
+  timers    Timer[]
+  users     UsersInProject[]
+}
+
+model Client {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  name      String    @db.VarChar(255)
+  owner     User      @relation(fields: [ownerID], references: [id])
+  ownerID   String
+  projects  Project[]
+}
