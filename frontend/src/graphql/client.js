@@ -33,6 +33,17 @@ const cacheUpdates = {
         return data
       })
     },
+    deleteTimer: (result, _args, cache, _info) => {
+      const query = gql`{
+        myTimers {
+          id
+        }
+      }`
+      cache.updateQuery({ query }, data => {
+        data.myTimers = data.myTimers.filter(t => t.id !== result.deleteTimer?.timer.id)
+        return data
+      })
+    },
     createClient: (result, _args, cache, _info) => {
       const query = gql`{
         myClients {

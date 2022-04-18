@@ -1,8 +1,10 @@
 import { styled } from 'goober'
 import { forwardRef } from 'react'
 
-const Button = ({ children, icon, secondary, loading, ...props }) => <StyledButton
+const Button = ({ children, icon, secondary, loading, danger, subtle, ...props }) => <StyledButton
+  $danger={danger}
   $secondary={secondary}
+  $subtle={subtle}
   $icon={!!icon} {...props}>
     {icon}
     {children}
@@ -18,6 +20,22 @@ const StyledButton = styled('button', forwardRef)`
   padding: .8em;
   cursor: pointer;
   font-size: 1.1rem;
+
+  ${p => p.$danger && `
+    & {
+      background: var(--clr-danger-background);
+      color: var(--clr-danger-color);
+    }
+  `}
+
+  ${p => p.$subtle && `
+    background: var(--clr-background);
+    color: var(--clr-surface-alt);
+    
+    &:hover {
+      transform: none;
+    }
+  `}
 
   ${p => p.$icon && `
     padding-right: 1.2em;

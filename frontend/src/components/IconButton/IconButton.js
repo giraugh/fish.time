@@ -17,7 +17,7 @@ const Button = styled('button')`
   cursor: pointer;
   --icon-colour: var(--clr-brand);
 
-  &:hover {
+  &:not([disabled]):hover {
     --icon-colour: var(--clr-white);
   }
 
@@ -45,13 +45,18 @@ const Button = styled('button')`
   `}
 
   ${p => p.$subtle && p.$filled && `
-    &:hover {
+    &:not([disabled]):hover {
       svg {
         fill: var(--icon-colour);
       }
     }
   `}
 
+  &[disabled] {
+    opacity: .3;
+    cursor: default;
+  }
+ 
   @media (max-width: 650px) {
     ${p => p.$hideIfSmall && `
       display: none; 

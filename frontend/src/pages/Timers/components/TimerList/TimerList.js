@@ -1,16 +1,17 @@
-import { useState, useEffect } from 'react'
-import { Play, MoreVertical } from 'lucide-react'
-import { useQuery } from 'urql'
+import { useState } from 'react'
+import { Play, MoreVertical, Trash, UserPlus, Pencil } from 'lucide-react'
+import { useQuery, useMutation } from 'urql'
 import groupBy from 'lodash.groupby'
 import dayjs from 'dayjs'
 import calendar from 'dayjs/plugin/calendar'
 
 import { projectColors } from '/src/utils/colors'
 import { GET_MY_TIMERS_QUERY } from '/src/graphql/queries'
-import { ScrollContainer, Spinner, GroupedRows, IconButton } from '/src/components'
+import { ScrollContainer, Spinner, GroupedRows, IconButton, Dropdown, Button } from '/src/components'
 import { usePreferenceStore } from '/src/stores'
 
 import { TimerRow, Tags, TimerGroupList, Tag, TimesSection, ButtonsSection, Description } from './timerListStyle'
+import { DELETE_TIMER_MUTATION } from '/src/graphql/mutations'
 
 dayjs.extend(calendar)
 
@@ -53,13 +54,16 @@ const TimerGroup = ({ day, timers }) => {
   </GroupedRows>
 }
 
-const Timer = ({ startTime, endTime, description, project }) => {
+const Timer = ({ id, startTime, endTime, description, project }) => {
+  const [menuIsOpen, setMenuIsOpen] = useState(false)
   const use12HourTime = usePreferenceStore(s => s.use12HourTime)
   const formatTime = date =>
     dayjs(date).format(use12HourTime ? 'hh:mm a' : 'HH:mm')
 
   const descriptionWithoutTags = description.replace(/#\w+/g, '')
   const tags = description.match(/#(\w+)/g) ?? []
+
+  const [, deleteTimer] = useMutation(DELETE_TIMER_MUTATION)
 
   return <GroupedRows.Row>
     <TimerRow>
@@ -76,7 +80,15 @@ const Timer = ({ startTime, endTime, description, project }) => {
         {!endTime && <span>Now</span>}
       </TimesSection>
       <ButtonsSection>
-        <IconButton icon={<MoreVertical />} subtle size={35} />
+        <Dropdown
+          openButton={<IconButton onClick={() => setMenuIsOpen(!menuIsOpen)} subtle size={35} icon={<MoreVertical />}/>} 
+          isOpen={menuIsOpen}
+          onClose={() => setMenuIsOpen(false)}
+          small
+        >
+          <Button subtle icon={<Pencil />}>Edit</Button>
+          <Button danger icon={<Trash />} onClick={() => { deleteTimer({ input: { id } }); setMenuIsOpen(false) }}>Delete</Button>
+        </Dropdown>
         <IconButton icon={<Play />} filled subtle size={35} />
       </ButtonsSection>
     </TimerRow>

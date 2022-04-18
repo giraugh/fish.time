@@ -5,9 +5,10 @@ import { Dropdown } from '/src/components'
 import { projectColors } from '/src/utils/colors'
 import { useGroupedProjects } from '/src/hooks'
 
-import { ProjectRow, ProjectGroup, GroupContainer } from './projectDropdownStyle'
+import { ProjectRow, ProjectGroup, GroupContainer, DropdownButton, Value } from './projectDropdownStyle'
 
 const ProjectDropdown = ({ value=null, onChange }) => {
+  const [isOpen, setIsOpen] = useState(false)
   const [filter, setFilter] = useState('')
   const { projectGroups } = useGroupedProjects({
     nullGroupName: 'NOCLIENT',
@@ -15,11 +16,21 @@ const ProjectDropdown = ({ value=null, onChange }) => {
   })
 
   return <Dropdown
-    icon={<Box size={35} />}
     label='Project'
-    value={value?.name}
-    color={value && projectColors[value?.id % projectColors.length]}
-    onClose={() => setFilter('')}
+    isOpen={isOpen}
+    onClose={() => { setIsOpen(false); setFilter('') }}
+    openButton={
+      <ProjectButton
+        color={value && projectColors[value?.id % projectColors.length]}
+        value={value?.name}
+        icon={<Box size={35} />}
+        isOpen={isOpen}
+        setIsOpen={isOpen => {
+          setIsOpen(isOpen)
+          if (!isOpen)
+            setFilter('')
+        }} />
+    }
   >
     {({ close }) => <>
       <Dropdown.Input
@@ -47,5 +58,12 @@ const ProjectDropdown = ({ value=null, onChange }) => {
     </>}
   </Dropdown>
 }
+
+const ProjectButton = ({ color, value, isOpen, setIsOpen, icon }) => 
+  <DropdownButton $color={color} $set={value} $isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
+    {icon}
+    <Value>{value}</Value>
+  </DropdownButton>
+
 
 export default ProjectDropdown
