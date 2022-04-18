@@ -11,8 +11,8 @@ const ProjectDropdown = () => {
   const [value, setValue] = useState(null)
   const [filter, setFilter] = useState('')
   const { projectGroups } = useGroupedProjects({
-    nullGroupName: null,
-    projectsFilter: project => project?.name?.toLowerCase().includes(filter.toLowerCase())
+    nullGroupName: 'NOCLIENT',
+    projectsFilter: project => (value?.id === project.id) || project?.name?.toLowerCase().includes(filter.toLowerCase())
   })
 
   return <Dropdown
@@ -30,13 +30,12 @@ const ProjectDropdown = () => {
         placeholder='Search for projects' />
       <GroupContainer>
         {projectGroups.map(([ clientName, projects ]) => <ProjectGroup key={clientName}>
-          {clientName ? <span>{clientName}</span> : <>
-            {clientName === null && <ProjectRow
-              $selected={value === null}
-              key={null}
-              onClick={() => { setValue(null); close() }} 
+          {clientName !== 'NOCLIENT' && <span>{clientName}</span>}
+          {clientName === 'NOCLIENT' && <ProjectRow
+            $selected={value === null}
+            key={null}
+            onClick={() => { setValue(null); close() }} 
             >No Project</ProjectRow>}
-          </>}
           {projects.map(project => <ProjectRow
             key={project.id}
             $selected={value?.id === project?.id}

@@ -11,9 +11,10 @@ const useGroupedProjects = ({ nullGroupName='No Client', projectsFilter }={}) =>
 
   const projectGroups = Array.from(new Set((filteredProjects ?? []).map(p => p.client?.id)))
     .map(clientID => [
-      projects.find(p => p.client?.id === clientID)?.client?.name || nullGroupName,
-      projects.filter(p => p?.client?.id === clientID)
+      filteredProjects.find(p => p.client?.id === clientID)?.client?.name || nullGroupName,
+      filteredProjects.filter(p => p?.client?.id === clientID)
     ])
+    .sort((a, b) => a[0]?.length - b[0]?.length)
 
   return { projects, filteredProjects, projectGroups, fetching, error }
 }
