@@ -1,5 +1,6 @@
 import { pipe, tap } from 'wonka'
 import { createClient, dedupExchange } from 'urql'
+import { gql } from '@urql/core'
 import { multipartFetchExchange } from '@urql/exchange-multipart-fetch'
 import { offlineExchange } from '@urql/exchange-graphcache'
 import { makeDefaultStorage } from '@urql/exchange-graphcache/default-storage'
@@ -20,9 +21,37 @@ export const storage = makeDefaultStorage({
   maxAge: 14,
 })
 
+const cacheUpdates = {
+  Mutation: {
+    createProject: (result, _args, cache, _info) => {
+      const query = gql`{
+        myProjects {
+          id
+        }
+      }`
+      cache.updateQuery({ query }, data => {
+        data.myProjects.push(result.createProject?.project)
+        return data
+      })
+    },
+    createClient: (result, _args, cache, _info) => {
+      const query = gql`{
+        myClients {
+          id
+        }
+      }`
+      cache.updateQuery({ query }, data => {
+        data.myClients.push(result.createClient?.client)
+        return data
+      })
+    }
+  }
+}
+
 // Create offline caching exchange
 export const cacheExchange = offlineExchange({
   storage,
+  updates: cacheUpdates,
   keys: {
     UserPreferences: () => null
   }

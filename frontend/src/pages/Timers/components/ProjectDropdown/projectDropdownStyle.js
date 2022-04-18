@@ -37,3 +37,8 @@ export const ProjectGroup = styled('div')`
     font-weight: 800;
   }
 `
+
+export const GroupContainer = styled('div')`
+  max-height: 25em;
+  overflow-y: auto;
+`

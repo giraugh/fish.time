@@ -5,7 +5,7 @@ import { Dropdown } from '/src/components'
 import { projectColors } from '/src/utils/colors'
 import { useGroupedProjects } from '/src/hooks'
 
-import { ProjectRow, ProjectGroup } from './projectDropdownStyle'
+import { ProjectRow, ProjectGroup, GroupContainer } from './projectDropdownStyle'
 
 const ProjectDropdown = () => {
   const [value, setValue] = useState(null)
@@ -28,7 +28,7 @@ const ProjectDropdown = () => {
         value={filter}
         onChange={e => setFilter(e.target.value)}
         placeholder='Search for projects' />
-      <>
+      <GroupContainer>
         {projectGroups.map(([ clientName, projects ]) => <ProjectGroup key={clientName}>
           {clientName ? <span>{clientName}</span> : <>
             {clientName === null && <ProjectRow
@@ -45,7 +45,7 @@ const ProjectDropdown = () => {
               {project.name} 
           </ProjectRow>)} 
         </ProjectGroup>)}
-      </>
+      </GroupContainer>
     </>}
   </Dropdown>
 }
