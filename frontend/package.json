@@ -1,6 +1,6 @@
 {
   "name": "time-fish-frontend",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "React Frontend for Time.Fish",
   "main": "index.js",
   "author": "Ewan Breakey",

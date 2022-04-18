@@ -1,6 +1,6 @@
 {
   "name": "fish-time-backend",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Backend for Fish.Time",
   "main": "./index.ts",
   "author": "Ewan Breakey",
