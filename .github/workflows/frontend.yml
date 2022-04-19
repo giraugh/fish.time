@@ -41,4 +41,4 @@ jobs:
         environment_name: Fishtimefrontend-env-1
         version_label: "fish-time-frontend-${{ steps.format-time.outputs.replaced }}"
         region: ap-southeast-2
-        deployment_package: deploy.zip
+        deployment_package: frontend/deploy.zip
