@@ -22,7 +22,7 @@ RUN apk del .gyp
 
 # Bundle app source
 COPY . ./
-RUN npx yarn build
+RUN NODE_ENV=production npx yarn build
 
 FROM nginx:stable-alpine
 COPY --from=build /app/dist /usr/share/nginx/web
