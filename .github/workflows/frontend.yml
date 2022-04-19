@@ -1,4 +1,4 @@
-name: Deploy Front End
+name: Deploy Frontend to Beanstalk
 on:
   push:
     branches:
