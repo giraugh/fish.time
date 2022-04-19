@@ -1,4 +1,4 @@
-const env = process.env.REACT_APP_BUILD_ENV || 'development'
+const env = process.env.NODE_ENV || 'development'
 
 const config = {
   development: {
@@ -7,7 +7,7 @@ const config = {
     WSAPI: 'ws://localhost:6001/graphql',
   },
   production: {
-    BASE_URL: '',
+    BASE_URL: 'https://fish.giraugh.xyz',
     API: '',
     WSAPI: '',
   }
