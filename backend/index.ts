@@ -15,6 +15,8 @@ const pubsub = new PubSub()
 app.use(cors())
 app.use(express.json({ limit: '1gb' }))
 
+app.get('/', (req, res) => res.send('🐠 Fish Time Backend'))
+
 // Create graphql route
 app.use('/graphql',
   /* #HACK #TODO */
@@ -31,7 +33,7 @@ app.use('/graphql',
   }))
 )
 
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT as number, () => {
   console.log(`🐠 (REST) Now Listening on ${PORT}`)
 
   const wsServer = new WebSocketServer({

@@ -2,7 +2,7 @@ FROM node:17-slim as build
 
 # Install openssl for prisma
 RUN apt-get update
-RUN apt-get install -y openssl
+RUN apt-get install -y openssl curl
 
 # Create app directory
 WORKDIR /app
@@ -23,4 +23,7 @@ COPY . ./
 RUN npx prisma generate
 
 EXPOSE 6001
+
+HEALTHCHECK --start-period=10s --interval=35s --timeout=10s CMD curl --fail http://localhost:6001 || exit 1
+
 CMD ["npx", "yarn", "start"]
