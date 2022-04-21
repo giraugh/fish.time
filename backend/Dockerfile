@@ -19,6 +19,9 @@ RUN npx yarn install --immutable --only=production
 # Bundle app source
 COPY . ./
 
+# Migrate DB if necessary
+RUN npx prisma migrate deploy
+
 # Generate db
 RUN npx prisma generate
 
