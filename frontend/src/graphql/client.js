@@ -1,6 +1,6 @@
 import { pipe, tap } from 'wonka'
 import { createClient, dedupExchange, subscriptionExchange } from 'urql'
-import { createClient as createWSClient } from 'graphql-ws'
+//import { createClient as createWSClient } from 'graphql-ws'
 import { gql } from '@urql/core'
 import { multipartFetchExchange } from '@urql/exchange-multipart-fetch'
 import { offlineExchange } from '@urql/exchange-graphcache'
@@ -81,18 +81,18 @@ export const cacheExchange = offlineExchange({
   }
 })
 
-// Web socket client
-const wsClient = createWSClient({
-  url: config.WSAPI,
-})
-
-const subExchange = subscriptionExchange({
-  forwardSubscription: operation => ({
-    subscribe: sink => ({
-      unsubscribe: wsClient.subscribe(operation, sink),
-    }),
-  })
-}) 
+// // Web socket client
+// const wsClient = createWSClient({
+//   url: config.WSAPI,
+// })
+// 
+// const subExchange = subscriptionExchange({
+//   forwardSubscription: operation => ({
+//     subscribe: sink => ({
+//       unsubscribe: wsClient.subscribe(operation, sink),
+//     }),
+//   })
+// }) 
 
 const client = createClient({
   url: config.API,
@@ -105,7 +105,7 @@ const client = createClient({
     })),
     errorExchange,
     cacheExchange,
-    subExchange,
+//    subExchange,
     multipartFetchExchange
   ]
 })

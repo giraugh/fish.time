@@ -24,24 +24,24 @@ const useCurrentTimer = () => {
     }
   }, [currentTimer])
 
-  // Update current status from a subscription
-  const [subRes] = useSubscription({ query: MY_CURRENT_TIMER_SUBSCRIPTION }, (_, data) => data)
-  useEffect(() => {
-    const timer = subRes?.data?.myCurrentTimer
-     if (timer) {
-       updateCurrent(timer)
-     } else {
-       setDescription('')
-       setProjectValue(null)
-       stopCurrent()
-       // TODO: refetch timers / add timer to list
-    }
-  }, [subRes?.data])
+  // // Update current status from a subscription
+  // const [subRes] = useSubscription({ query: MY_CURRENT_TIMER_SUBSCRIPTION }, (_, data) => data)
+  // useEffect(() => {
+  //   const timer = subRes?.data?.myCurrentTimer
+  //    if (timer) {
+  //      updateCurrent(timer)
+  //    } else {
+  //      setDescription('')
+  //      setProjectValue(null)
+  //      stopCurrent()
+  //      // TODO: refetch timers / add timer to list
+  //   }
+  // }, [subRes?.data])
 
   // Update current state from a query
-  const [timerRes] = useQuery({ query: GET_MY_CURRENT_TIMER_QUERY, pause: subRes?.data })
+  const [timerRes] = useQuery({ query: GET_MY_CURRENT_TIMER_QUERY/*, pause: subRes?.data */})
   useEffect(() => {
-    const timer = !(subRes?.data?.myCurrentTimer) && timerRes?.data?.myCurrentTimer
+    const timer = /*!(subRes?.data?.myCurrentTimer) && */timerRes?.data?.myCurrentTimer
      if (timer) {
        updateCurrent(timer)
      }
