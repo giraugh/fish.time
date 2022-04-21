@@ -9,7 +9,7 @@ const config = {
   production: {
     BASE_URL: 'https://fish.giraugh.xyz',
     API: 'https://aqueduct.fish.giraugh.xyz/graphql',
-    WSAPI: 'ws://aqueduct.fish.giraugh.xyz/graphql',
+    WSAPI: 'wss://aqueduct.fish.giraugh.xyz/graphql',
   }
 }
 
