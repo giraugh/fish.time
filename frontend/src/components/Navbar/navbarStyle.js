@@ -32,13 +32,19 @@ export const Nav = styled('nav')`
     }
   }
 
-  @media screen and (max-width: 650px) {
+  @media (max-width: 650px) {
     flex-direction: row;
     width: inherit;
     height: 4.5em;
 
     a, img {
       height: 100%;
+    }
+  }
+
+  @media (min-width: 650px) {
+    a:last-of-type {
+      margin-top: auto;
     }
   }
 `
@@ -52,7 +58,7 @@ export const SidebarTab = styled(`div`)`
   width: 100%;
   aspect-ratio: 1 / 1;
 
-  @media screen and (max-width: 650px) {
+  @media (max-width: 650px) {
     height: 100%;
   }
 `

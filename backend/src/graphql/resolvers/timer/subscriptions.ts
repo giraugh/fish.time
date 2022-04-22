@@ -1,4 +1,4 @@
-import client from 'client'
+import prisma from 'db/client'
 
 const myCurrentTimer = {
   subscribe: (_parent, _args, { pubsub }) =>

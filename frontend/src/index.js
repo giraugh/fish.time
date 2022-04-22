@@ -7,6 +7,7 @@ import { Provider } from 'urql'
 import * as Pages from './pages'
 import { Navbar, Main, Waves, TimerDuration } from '/src/components'
 import client from '/src/graphql/client'
+import { Auth, NoAuth } from '/src/utils/pageWrappers'
 
 // Set up goober to use React
 setup(
@@ -23,6 +24,7 @@ const App = () => <>
       <Route path="/" element={<Pages.Timers />} />
       <Route path="/projects" element={<Pages.Projects />} />
       <Route path="/clients" element={<Pages.Clients />} />
+      <Route path="/logout" element={<Pages.Logout />} />
       <Route path="*" element={<h1>404! Oh no!</h1>} />
     </Routes>
     <Waves />
@@ -34,7 +36,9 @@ render(
   <Provider value={client}>
     <BrowserRouter>
       <Routes>
-        <Route path="/app/*" element={<App />} />
+        <Route path="/app/*" element={<Auth element={<App />} />} />
+        <Route path="/login" element={<NoAuth element={<Pages.Login />} />} />
+        <Route path="/signup" element={<NoAuth element={<Pages.Signup />} />} />
         <Route path="*" element={<Pages.Home />} />
       </Routes>
     </BrowserRouter>

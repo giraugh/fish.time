@@ -15,6 +15,7 @@ model User {
   createdAt   DateTime         @default(now())
   updatedAt   DateTime         @updatedAt
   displayName String
+  email       String           @unique
   projects    UsersInProject[]
   clients     Client[]
   timers      Timer[]

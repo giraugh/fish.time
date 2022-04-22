@@ -2,7 +2,6 @@ import { forwardRef } from 'react'
 import { styled } from 'goober'
 
 export const Svg = styled('svg', forwardRef)`
-  position: fixed;
   left: 0;
   width: 100%;
   height: min-content;
@@ -11,6 +10,10 @@ export const Svg = styled('svg', forwardRef)`
   opacity: 0;
 
   transition: bottom .5s, opacity .5s;
+
+  ${p => p.$sticky && `
+    position: fixed;
+  `}
 
   ${p => p.$active && `
     bottom: -20px; 

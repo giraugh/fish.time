@@ -1,27 +1,30 @@
 import { Project as DBProject } from '@prisma/client'
-import client from 'client'
+import prisma from 'db/client'
 import dayjs from 'dayjs'
+import { guard, isAuthenticated, isMyProject, isProjectSharedWithMe } from 'utils/guards'
 
 export { default as projectMutations } from './mutations'
 
 export const projectQueries = {
-  project: async (_parent, { id }: { id: number }, { user }) =>
-    client.project.findFirst({ where: { id, users: { some: { userID: user.id }} }}),
-  myProjects: async (_parent, _args, { user }) =>
-    client.project.findMany({ where: { users: { some: { userID: user.id } }}}),
+  project: async (_parent, { id }: { id: number }, context) =>
+    guard([isMyProject(id), isProjectSharedWithMe(id)], context)
+    .then(() => prisma.project.findFirst({ where: { id, users: { some: { userID: context.user.id }} }})),
+  myProjects: async (_parent, _args, context) =>
+    guard([isAuthenticated()], context)
+    .then(() => prisma.project.findMany({ where: { users: { some: { userID: context.user.id } }}})),
 }
 
 export const Project = {
   client: async (parent: DBProject) =>
-    client.project
+    prisma.project
       .findUnique({ where: { id: parent.id } })
       .client(),
   timers: async (parent: DBProject) =>
-    client.project
+    prisma.project
       .findUnique({ where: { id: parent.id } })
       .timers(),
   totalDuration: (parent: DBProject) =>
-    client.timer
+    prisma.timer
     .findMany({
       where: { project: { id: parent.id } }
     })
@@ -30,7 +33,7 @@ export const Project = {
       .reduce((a, b) => a + b, 0)
     ),
   isShared: (parent: DBProject) =>
-      client.project
+      prisma.project
         .findUnique({ where: { id: parent.id }})
         .users({ where: { isOwner: false }})
         .then(guests => guests.length > 0)

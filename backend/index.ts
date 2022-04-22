@@ -5,6 +5,7 @@ import { WebSocketServer } from 'ws'
 import { useServer } from 'graphql-ws/lib/use/ws'
 import { PubSub } from 'graphql-subscriptions'
 
+import { decodeToken, hydrateUser } from 'middleware'
 import schema from './src/graphql/schema'
 import { PORT } from './src/config/env'
 
@@ -19,13 +20,8 @@ app.get('/', (req, res) => res.send('🐠 Fish Time Backend'))
 
 // Create graphql route
 app.use('/graphql',
-  /* #HACK #TODO */
-  ((req:any, res, next) => {
-    req.user = {
-      id: 'test-user-0'
-    }
-    next()
-  }),
+  decodeToken,
+  hydrateUser,
   graphqlHTTP((req: any) => ({
     schema,
     graphiql: true,

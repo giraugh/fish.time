@@ -8,6 +8,7 @@ import { makeDefaultStorage } from '@urql/exchange-graphcache/default-storage'
 
 import config from '/src/config'
 import { contextExchange } from '/src/utils'
+import { createToken } from '/src/auth'
 
 const cacheUpdates = {
   Mutation: {
@@ -101,7 +102,7 @@ const client = createClient({
     dedupExchange,
     contextExchange(async ctx => ({
       ...ctx,
-      /* #TODO: fetchOptions: { headers: { authorization: await createToken() } } */
+      fetchOptions: { headers: { authorization: await createToken() } } 
     })),
     errorExchange,
     cacheExchange,

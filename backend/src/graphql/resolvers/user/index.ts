@@ -1,16 +1,18 @@
 import { User as DBUser } from '@prisma/client'
-import client from 'client'
+import prisma from 'db/client'
+import { guard, isSelf } from 'utils/guards'
 
 export { default as userMutations } from './mutations'
 
 export const userQueries = {
-  user: async (_parent, { id }: { id: string }, { user }) =>
-    user.id === id && client.user.findUnique({ where: { id }})
+  user: async (_parent, { id }: { id: string }, context) =>
+    guard([isSelf(context.user.id)], context)
+    .then(() => prisma.user.findUnique({ where: { id }}))
 }
 
 export const User = {
   projects: async (parent: DBUser, { isOwner }: { isOwner: boolean }) =>
-    client.project
+    prisma.project
       .findMany({
         where: {
           users: {
@@ -21,12 +23,12 @@ export const User = {
           }
         }
       }),
-  clients: async (parent: DBUser) =>
-    client.user
-      .findUnique({ where: { id: parent?.id }})
-      .clients(),
+  clients: async (parent: DBUser, _args) =>
+    prisma.user
+    .findUnique({ where: { id: parent?.id }})
+    .clients(),
   timers: async (parent: DBUser, { isOwner }: { isOwner: boolean }) => 
-    client.timer
+    prisma.timer
       .findMany({
         where: {
           project: {
