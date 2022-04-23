@@ -16,7 +16,7 @@ const longRunningTimers = async (req, res) => {
   const longRunningTimers = await prisma.timer.findMany({
     where: {
       endTime: null,
-      startTime: { lt: dayjs().subtract(1, 'minute').toDate() }
+      startTime: { lt: dayjs().subtract(1, 'day').toDate() }
     }
   })
 
