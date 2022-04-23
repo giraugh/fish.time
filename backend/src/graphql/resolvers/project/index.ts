@@ -1,14 +1,15 @@
 import { Project as DBProject } from '@prisma/client'
 import prisma from 'db/client'
 import dayjs from 'dayjs'
-import { guard, isAuthenticated, isMyProject, isProjectSharedWithMe } from 'utils/guards'
+import { guard, isAuthenticated, isMyProject, isProjectSharedWithMe, redact } from 'utils/guards'
 
 export { default as projectMutations } from './mutations'
 
 export const projectQueries = {
   project: async (_parent, { id }: { id: number }, context) =>
     guard([isMyProject(id), isProjectSharedWithMe(id)], context)
-    .then(() => prisma.project.findFirst({ where: { id, users: { some: { userID: context.user.id }} }})),
+    .then(() => prisma.project.findFirst({ where: { id, users: { some: { userID: context.user.id }} }}))
+    .catch(redact),
   myProjects: async (_parent, _args, context) =>
     guard([isAuthenticated()], context)
     .then(() => prisma.project.findMany({ where: { users: { some: { userID: context.user.id } }}})),

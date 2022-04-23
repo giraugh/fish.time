@@ -1,13 +1,14 @@
 import { User as DBUser } from '@prisma/client'
 import prisma from 'db/client'
-import { guard, isSelf } from 'utils/guards'
+import { guard, isSelf, redact } from 'utils/guards'
 
 export { default as userMutations } from './mutations'
 
 export const userQueries = {
   user: async (_parent, { id }: { id: string }, context) =>
-    guard([isSelf(context.user.id)], context)
+    guard([isSelf(id)], context)
     .then(() => prisma.user.findUnique({ where: { id }}))
+    .catch(redact)
 }
 
 export const User = {

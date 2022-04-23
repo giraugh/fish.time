@@ -21,10 +21,12 @@ const longRunningTimers = async (req, res) => {
   })
 
   // Hydrate timer list with user emails
-  const timersWithEmails = Promise.all(longRunningTimers
+  const timersWithEmails = await Promise.all(longRunningTimers
     .map(async timer => ({
       ...timer,
-      email: (await prisma.user.findUnique({ where: { id: timer.ownerID }}))?.email
+      user: {
+        email: (await prisma.user.findUnique({ where: { id: timer.ownerID }}))?.email
+      }
     })))
 
   return res.status(200).json({ timers: timersWithEmails })

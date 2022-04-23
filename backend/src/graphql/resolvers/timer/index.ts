@@ -1,7 +1,7 @@
 import { Timer as DBTimer } from '@prisma/client'
 import prisma from 'db/client'
 import dayjs from 'dayjs'
-import { guard, isAuthenticated } from 'utils/guards'
+import { guard, isAuthenticated, redact } from 'utils/guards'
 
 export { default as timerMutations } from './mutations'
 export { default as timerSubscriptions } from './subscriptions'
@@ -9,7 +9,8 @@ export { default as timerSubscriptions } from './subscriptions'
 export const timerQueries = {
   timer: async (_parent, { id }: { id: number }, context) =>
     guard([isAuthenticated()], context)
-    .then(() => prisma.timer.findFirst({ where: { id, ownerID: context.user.id }})),
+    .then(() => prisma.timer.findFirst({ where: { id, ownerID: context.user.id }}))
+    .catch(redact),
   myTimers: async (_parent, _args, context) =>
     guard([isAuthenticated()], context)
     .then(() => prisma.timer.findMany({ where: { ownerID: context.user.id, endTime: { not: null } }})),

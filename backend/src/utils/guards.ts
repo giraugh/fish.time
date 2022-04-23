@@ -18,6 +18,15 @@ export const guard = async (filters: Filter[], context: Context) => {
   }
 }
 
+// Handler for promises taht returns null instead of forwarding error
+export const redact = error => {
+  if (error instanceof AuthError) {
+    return null
+  } else {
+    throw error
+  }
+}
+
 // Guard for user is authenticated
 export const isAuthenticated: FilterFactory = () => async ({ user }) => !!user
 
