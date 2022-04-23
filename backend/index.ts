@@ -8,6 +8,7 @@ import { PubSub } from 'graphql-subscriptions'
 import { decodeToken, hydrateUser } from 'middleware'
 import schema from './src/graphql/schema'
 import { PORT } from './src/config/env'
+import { longRunningTimers } from 'routes'
 
 const app = express()
 const pubsub = new PubSub()
@@ -16,7 +17,9 @@ const pubsub = new PubSub()
 app.use(cors())
 app.use(express.json({ limit: '1gb' }))
 
+// Setup static routes
 app.get('/', (req, res) => res.send('🐠 Fish Time Backend'))
+app.get('/long-running-timers', longRunningTimers)
 
 // Create graphql route
 app.use('/graphql',
