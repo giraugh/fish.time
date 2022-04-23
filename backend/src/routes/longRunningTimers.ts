@@ -9,14 +9,14 @@ if (!LAMBDA_KEY) {
 const longRunningTimers = async (req, res) => {
   // Check lambda key
   if (!req.query.key || req.query.key != LAMBDA_KEY) {
-    return res.status(403).json({ query: req.query, error: 'Must have valid ?key query param: ' + LAMBDA_KEY, timers: [] })
+    return res.status(403).json({ query: req.query, error: 'Must have valid ?key query param', timers: [] })
   }
   
   // Get long running timers
   const longRunningTimers = await prisma.timer.findMany({
     where: {
       endTime: null,
-      startTime: { lt: dayjs().subtract(1, 'day').toDate() }
+      startTime: { lt: dayjs().subtract(1, 'minute').toDate() }
     }
   })
 
