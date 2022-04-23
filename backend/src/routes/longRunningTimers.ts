@@ -2,10 +2,15 @@ import prisma from 'db/client'
 import { LAMBDA_KEY } from 'config/env'
 import dayjs from 'dayjs'
 
+if (!LAMBDA_KEY) {
+  throw Error('Expected ENV VAR "LAMBDA_KEY" to be set')
+}
+
 const longRunningTimers = async (req, res) => {
   // Check lambda key
-  if (!req.params.key || req.params.key !== LAMBDA_KEY)
-    return res.status(403).json({ error: 'Must have valid ?key param: ' + LAMBDA_KEY, timers: [] })
+  if (!req.params.key || req.params.key != LAMBDA_KEY) {
+    return res.status(403).json({ params: req.params, error: 'Must have valid ?key param: ' + LAMBDA_KEY, timers: [] })
+  }
   
   // Get long running timers
   const longRunningTimers = await prisma.timer.findMany({
