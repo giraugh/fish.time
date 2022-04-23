@@ -26,4 +26,4 @@ EXPOSE 6001
 
 HEALTHCHECK --start-period=10s --interval=35s --timeout=10s CMD curl --fail http://localhost:6001 || exit 1
 
-CMD ["npx", "prisma", "migrate", "deploy", "&&", "npx", "yarn", "start"]
+CMD ["sh", "-c", "npx", "prisma", "migrate", "deploy", "&&", "npx", "yarn", "start"]
