@@ -5,7 +5,7 @@ import dayjs from 'dayjs'
 const longRunningTimers = async (req, res) => {
   // Check lambda key
   if (!req.params.key || req.params.key !== LAMBDA_KEY)
-    res.status(403).send('Must have valid ?key param')
+    return res.status(403).send('Must have valid ?key param')
   
   // Get long running timers
   const longRunningTimers = await prisma.timer.findMany({
