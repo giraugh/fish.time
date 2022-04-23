@@ -8,8 +8,8 @@ if (!LAMBDA_KEY) {
 
 const longRunningTimers = async (req, res) => {
   // Check lambda key
-  if (!req.params.key || req.params.key != LAMBDA_KEY) {
-    return res.status(403).json({ params: req.params, error: 'Must have valid ?key param: ' + LAMBDA_KEY, timers: [] })
+  if (!req.query.key || req.query.key != LAMBDA_KEY) {
+    return res.status(403).json({ query: req.query, error: 'Must have valid ?key query param: ' + LAMBDA_KEY, timers: [] })
   }
   
   // Get long running timers
