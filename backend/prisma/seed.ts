@@ -7,6 +7,7 @@ const userData: Prisma.UserCreateInput[] = [
   {
     id: 'test-user-0',
     displayName: 'Test User 0',
+    email: 'test-user-0@fishtime.xyz',
     clients: {
       create: [{
         id: 0,
@@ -17,6 +18,7 @@ const userData: Prisma.UserCreateInput[] = [
   {
     id: 'test-user-1',
     displayName: 'Test User 1',
+    email: 'test-user-1@fishtime.xyz',
     clients: {}
   }
 ]
