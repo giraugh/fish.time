@@ -19,6 +19,7 @@ Onboarding.Button = styled('button')`
   padding: 1em;
   border: none;
   border-radius: var(--border-radius);
+  cursor: pointer;
 
   &[disabled] {
     opacity: .7;

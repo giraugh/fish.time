@@ -113,6 +113,7 @@ const Signup = () => {
         <Field
         {...register('password', { required: 'Password is required' })}
         error={errors?.password?.message}
+        minLength={6}
         required type='password' label='Password' />
         <Field
         {...register('passwordAgain', {
