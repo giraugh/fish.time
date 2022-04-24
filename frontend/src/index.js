@@ -41,7 +41,7 @@ render(
         <Route path="/app/*" element={<Auth element={<App />} />} />
         <Route path="/login" element={<NoAuth element={<Pages.Login />} />} />
         <Route path="/signup" element={<NoAuth element={<Pages.Signup />} />} />
-        <Route path="*" element={<Pages.Home />} />
+        <Route path="*" element={<NoAuth element={<Pages.Home />} />} />
       </Routes>
     </BrowserRouter>
   </Provider>,
