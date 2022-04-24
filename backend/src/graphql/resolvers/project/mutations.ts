@@ -6,7 +6,7 @@ const createProject = async (_parent, { input: data }, { user }) => {
   const project = await prisma.project.create({ data })
 
   // Add ourselves as owner
-  await prisma.usersInProject.create({ data: { userID: user.id, projectID: project.id }})
+  await prisma.usersInProject.create({ data: { userID: user.id, projectID: project.id, isOwner: true }})
 
   // Return the project payload
   return { project }

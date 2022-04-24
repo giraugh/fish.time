@@ -1,11 +1,14 @@
-import { User, Users, MoreVertical, Plus } from 'lucide-react'
+import { useState } from 'react'
+import { useMutation } from 'urql'
+import { User, Users, MoreVertical, Plus, Pencil, Trash, UserX, UserPlus } from 'lucide-react'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import updateLocale from 'dayjs/plugin/updateLocale'
 
+import { DELETE_PROJECT_MUTATION } from '/src/graphql/mutations'
 import { projectColors } from '/src/utils/colors'
-import { Spinner, IconButton, ScrollContainer, GroupedRows, Button, PageHeading } from '/src/components'
+import { Spinner, IconButton, ScrollContainer, GroupedRows, Button, PageHeading, Dropdown } from '/src/components'
 import { useGroupedProjects } from '/src/hooks'
 
 import { CreateProjectModal } from './pages/'
@@ -71,8 +74,18 @@ const ProjectGroup = ({ clientName, projects }) => {
   </GroupedRows>
 }
 
-const Project = ({ id, name, totalDuration, isShared }) => {
+const Project = ({ id, name, totalDuration, isShared, isMine }) => {
+  const [menuIsOpen, setMenuIsOpen] = useState(false)
   const duration = dayjs.duration(totalDuration, 'seconds').humanize()
+
+  // Project Deletion
+  const [, deleteProject] = useMutation(DELETE_PROJECT_MUTATION)
+  const handleDeleteProject = () => {
+    // TODO: prompt whether to delete timers
+    
+    // Delete project
+    deleteProject({ input: { id }})
+  }
 
   return <GroupedRows.Row>
     <ProjectRow>
@@ -81,7 +94,20 @@ const Project = ({ id, name, totalDuration, isShared }) => {
         {name}
       </ProjectName>
       <span>{duration}</span>
-      <IconButton icon={<MoreVertical />} size={35} />
+      <Dropdown
+          openButton={<IconButton onClick={() => setMenuIsOpen(!menuIsOpen)} subtle size={35} icon={<MoreVertical />}/>} 
+          isOpen={menuIsOpen}
+          onClose={() => setMenuIsOpen(false)}
+          small
+        >
+          {isMine ? <>
+            <Button disabled subtle icon={<UserPlus />}>Invite</Button>
+            <Button disabled subtle icon={<Pencil />}>Edit</Button>
+            <Button danger icon={<Trash />} onClick={() => { handleDeleteProject(); setMenuIsOpen(false) }}>Delete</Button>
+          </> : <>
+            <Button disabled subtle icon={<UserX />}>Leave</Button>
+          </>}
+      </Dropdown>
     </ProjectRow>
   </GroupedRows.Row>
 }

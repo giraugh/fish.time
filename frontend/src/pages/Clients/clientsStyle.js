@@ -36,7 +36,7 @@ export const ClientCard = styled('div')`
   padding-right: .5em;
   font-size: 1.4rem;
   min-width: 14em;
-  height: 3em;
+  padding-block: .5em;
 
   background: var(--clr-surface);
   color: var(--clr-white);

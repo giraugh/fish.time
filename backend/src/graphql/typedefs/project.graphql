@@ -19,6 +19,7 @@ type Project {
   totalDuration: Float! # The total duration of all associated timers (in seconds)
   timers: [Timer!]!
   isShared: Boolean!
+  isMine: Boolean!
 }
 
 input CreateProjectInput {

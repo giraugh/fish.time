@@ -65,6 +65,10 @@ const StyledButton = styled('button', forwardRef)`
       height: 4px;
     }
   }
+
+  &[disabled] {
+    opacity: .7;
+  }
 `
 
 export default Button

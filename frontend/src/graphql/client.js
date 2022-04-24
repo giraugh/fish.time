@@ -45,6 +45,17 @@ const cacheUpdates = {
         return data
       })
     },
+    deleteClient: (result, _args, cache, _info) => {
+      const query = gql`{
+        myClients {
+          id
+        }
+      }`
+      cache.updateQuery({ query }, data => {
+        data.myClients = data.myClients.filter(t => t.id !== result.deleteClient?.client.id)
+        return data
+      })
+    },
     createClient: (result, _args, cache, _info) => {
       const query = gql`{
         myClients {

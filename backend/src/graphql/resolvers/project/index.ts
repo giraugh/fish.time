@@ -34,8 +34,12 @@ export const Project = {
       .reduce((a, b) => a + b, 0)
     ),
   isShared: (parent: DBProject) =>
-      prisma.project
-        .findUnique({ where: { id: parent.id }})
-        .users({ where: { isOwner: false }})
-        .then(guests => guests.length > 0)
+    prisma.project
+      .findUnique({ where: { id: parent.id }})
+      .users({ where: { isOwner: false }})
+      .then(guests => guests.length > 0),
+  isMine: (parent: DBProject, _args, context) =>
+    prisma.usersInProject
+      .findFirst({ where: { projectID: parent.id, userID: context?.user.id, isOwner: true } })
+      .then(row => !!row)
 }
