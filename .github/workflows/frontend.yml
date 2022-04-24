@@ -2,7 +2,7 @@ name: Deploy Frontend to Beanstalk
 on:
   push:
     branches:
-      - dev
+      - main
 
 defaults:
   run:

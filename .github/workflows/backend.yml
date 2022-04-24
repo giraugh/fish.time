@@ -8,7 +8,7 @@ name: Deploy Backend to ECS
 on:
   push:
     branches:
-      - dev
+      - main
 
 env:
   AWS_REGION: ap-southeast-2
