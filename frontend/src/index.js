@@ -1,7 +1,7 @@
 import { render } from 'react-dom'
 import { createElement } from 'react'
 import { setup } from 'goober'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 import { Provider } from 'urql'
 
 import * as Pages from './pages'
@@ -21,11 +21,11 @@ const App = () => <>
   <Navbar />
   <Main>
     <Routes>
-      <Route path="/" element={<Pages.Timers />} />
+      <Route path="/timers" element={<Pages.Timers />} />
       <Route path="/projects" element={<Pages.Projects />} />
       <Route path="/clients" element={<Pages.Clients />} />
       <Route path="/logout" element={<Pages.Logout />} />
-      <Route path="*" element={<h1>404! Oh no!</h1>} />
+      <Route path="*" element={<Navigate to='/app/timers' />} />
     </Routes>
     <Waves />
     <TimerDuration />

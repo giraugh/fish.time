@@ -11,7 +11,7 @@ const Navbar = () => {
   
   return <Nav>
     <Logo />
-    <NavLink to='/app'><SidebarTab><Timer size={ICON_SIZE} color='var(--icon-clr)' /></SidebarTab></NavLink>
+    <NavLink to='/app/timers'><SidebarTab><Timer size={ICON_SIZE} color='var(--icon-clr)' /></SidebarTab></NavLink>
     <NavLink to='/app/projects'><SidebarTab><Package size={ICON_SIZE} color='var(--icon-clr)' /></SidebarTab></NavLink>
     <NavLink to='/app/clients'><SidebarTab><Briefcase size={ICON_SIZE} color='var(--icon-clr)' /></SidebarTab></NavLink>
     <NavLink to='/app/stats'><SidebarTab><PieChart size={ICON_SIZE} color='var(--icon-clr)' /></SidebarTab></NavLink>
