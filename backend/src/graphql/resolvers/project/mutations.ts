@@ -20,9 +20,16 @@ const updateProject = async (_parent, { input: { id, ...data }}, context) =>
 
 const deleteProject = async (_parent, { input: { id }}, context) =>
   guard([isMyProject(id)], context)
-  .then(() => prisma.project
-    .delete({ where: { id }})
-    .then(project => ({ project })))
+  .then(async () => {
+    // Remove users from project
+    await prisma.usersInProject
+      .deleteMany({ where: { projectID: id }})
+
+    // Delete project
+    await prisma.project
+      .delete({ where: { id }})
+      .then(project => ({ project }))
+  })
 
 const shareProject = async (_parent, { input: { id, userID }}, context) => 
   guard([isMyProject(id)], context)
