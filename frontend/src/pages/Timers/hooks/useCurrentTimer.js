@@ -42,7 +42,8 @@ const useCurrentTimer = () => {
   const [timerRes] = useQuery({ query: GET_MY_CURRENT_TIMER_QUERY/*, pause: subRes?.data */})
   useEffect(() => {
     const timer = /*!(subRes?.data?.myCurrentTimer) && */timerRes?.data?.myCurrentTimer
-     if (timer) {
+     if (timer && timer.endTime === null) {
+       console.log('start from', timer)
        updateCurrent(timer)
      }
   }, [timerRes?.data])
