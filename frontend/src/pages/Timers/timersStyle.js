@@ -1,4 +1,5 @@
 import { styled } from 'goober'
+import { mobileBP } from '/src/styles/breakpoints'
 
 export const Container = styled('div')`
   display: flex;
@@ -18,7 +19,7 @@ export const TimeHeading = styled('h3')`
   color: var(--clr-white);
   font-weight: normal;
 
-  @media (max-width: 650px) {
+  @media (max-width: ${mobileBP}) {
     font-size: 4.5rem;
     padding: 0.2em 0.3em;
   }

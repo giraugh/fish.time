@@ -1,4 +1,5 @@
 import { styled } from 'goober'
+import { mobileBP } from '/src/styles/breakpoints'
 
 const Main = styled('main')`
   display: flex;
@@ -8,7 +9,7 @@ const Main = styled('main')`
   position: relative;
   max-height: 100vh;
 
-  @media (max-width: 650px) {
+  @media (max-width: ${mobileBP}) {
     padding: .5em;
   }
 `

@@ -1,5 +1,6 @@
 import { styled } from 'goober'
 import { MoreVertical } from 'lucide-react'
+import { mobileBP } from '/src/styles/breakpoints'
 
 const IconButton = ({ icon = <MoreVertical/>, filled = false, size = '50px', subtle = false, hideIfSmall, ...props }) =>
   <Button
@@ -57,7 +58,7 @@ const Button = styled('button')`
     cursor: default;
   }
  
-  @media (max-width: 650px) {
+  @media (max-width: ${mobileBP}) {
     ${p => p.$hideIfSmall && `
       display: none; 
     `}

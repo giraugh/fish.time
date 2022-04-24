@@ -22,6 +22,7 @@ const App = () => <>
   <Main>
     <Routes>
       <Route path="/timers" element={<Pages.Timers />} />
+      <Route path="/resources" element={<Pages.TimerResources />} />
       <Route path="/projects" element={<Pages.Projects />} />
       <Route path="/clients" element={<Pages.Clients />} />
       <Route path="/logout" element={<Pages.Logout />} />

@@ -1,4 +1,5 @@
 import { styled } from 'goober'
+import { mobileBP } from '/src/styles/breakpoints'
 
 export const Heading = styled('h3')`
   position: fixed;
@@ -12,7 +13,7 @@ export const Heading = styled('h3')`
   transition: opacity .5s;
   text-shadow: 0px 3px #9bb3d2;
 
-  @media (max-width: 650px) {
+  @media (max-width: ${mobileBP}) {
     font-size: 4.5rem;
     padding: 0.2em 0.3em;
   }

@@ -1,6 +1,8 @@
 import { styled } from 'goober'
 import { forwardRef } from 'react'
 
+import { mobileBP  } from '/src/styles/breakpoints'
+
 export const Container = styled('div', forwardRef)`
   position: fixed;
   inset: 0;
@@ -44,7 +46,7 @@ export const Content = styled('div', forwardRef)`
     transform: translateY(5px);
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: ${mobileBP}) {
     border-radius: 0;
   }
 `

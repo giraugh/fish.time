@@ -1,4 +1,5 @@
 import { styled } from 'goober'
+import { mobileBP } from '/src/styles/breakpoints'
 
 export const ProjectRow = styled('div')`
   width: 100%;
@@ -71,7 +72,7 @@ export const DropdownButton = styled('button')`
     }
   `}
 
-  @media (min-width: 650px) {
+  @media (min-width: ${mobileBP}) {
     ${p => p.$set && `
       gap: .4em;
       padding: .4em 1em;
@@ -99,7 +100,7 @@ export const DropdownButton = styled('button')`
 export const Value = styled('span')`
   font-size: 1.2rem;
 
-  @media (max-width: 650px) {
+  @media (max-width: ${mobileBP}) {
     display: none;
   }
 `

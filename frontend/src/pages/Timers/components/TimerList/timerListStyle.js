@@ -1,4 +1,5 @@
 import { styled } from 'goober'
+import { mobileBP } from '/src/styles/breakpoints'
 
 export const TimerRow = styled('div')`
   display: flex;
@@ -41,7 +42,7 @@ export const Tag = styled('span')`
     color: var(--clr-surface-alt);
   `}
 
-  @media (max-width: 650px) {
+  @media (max-width: ${mobileBP}) {
     ${p => !(p.$always || p.$isCount) && `
       display: none;
     `}
@@ -58,14 +59,14 @@ export const TimesSection = styled('div')`
   flex: 1;
   color: var(--clr-surface-alt);
 
-  @media (max-width: 650px) {
+  @media (max-width: ${mobileBP}) {
     display: none;
   }
 `
 
 export const ButtonsSection = styled('div')`
   display: flex;
-  @media (max-width: 650px) {
+  @media (max-width: ${mobileBP}) {
     flex: 1;
     justify-content: end;
   }
@@ -76,7 +77,7 @@ export const Description = styled('span')`
   overflow: hidden;
   text-overflow: ellipsis;
 
-  @media (max-width: 650px) {
+  @media (max-width: ${mobileBP}) {
     font-size: 1rem;
   }
 `
