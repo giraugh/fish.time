@@ -15,7 +15,7 @@ const Navbar = () => {
     <Mobile><NavLink to='/app/resources'><SidebarTab><Package size={ICON_SIZE} color='var(--icon-clr)' /></SidebarTab></NavLink></Mobile>
     <Desktop><NavLink to='/app/projects'><SidebarTab><Package size={ICON_SIZE} color='var(--icon-clr)' /></SidebarTab></NavLink></Desktop>
     <Desktop><NavLink to='/app/clients'><SidebarTab><Briefcase size={ICON_SIZE} color='var(--icon-clr)' /></SidebarTab></NavLink></Desktop>
-    <NavLink to='/app/stats'><SidebarTab><PieChart size={ICON_SIZE} color='var(--icon-clr)' /></SidebarTab></NavLink>
+    <NavLink to='/app/reports'><SidebarTab><PieChart size={ICON_SIZE} color='var(--icon-clr)' /></SidebarTab></NavLink>
     <NavLink to='/app/logout'><SidebarTab><LogOut size={ICON_SIZE} color='var(--icon-clr)' /></SidebarTab></NavLink>
   </Nav>
 }

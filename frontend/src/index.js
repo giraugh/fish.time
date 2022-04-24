@@ -25,6 +25,7 @@ const App = () => <>
       <Route path="/resources" element={<Pages.TimerResources />} />
       <Route path="/projects" element={<Pages.Projects />} />
       <Route path="/clients" element={<Pages.Clients />} />
+      <Route path="/reports" element={<Pages.Reports />} />
       <Route path="/logout" element={<Pages.Logout />} />
       <Route path="*" element={<Navigate to='/app/timers' />} />
     </Routes>
