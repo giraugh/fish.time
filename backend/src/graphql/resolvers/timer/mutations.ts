@@ -1,42 +1,49 @@
-import client from 'client'
+import prisma from 'db/client'
+import { guard, isAuthenticated, isMyTimer } from 'utils/guards'
 
-const startTimer = async (_parent, { input: data }, { user, pubsub }) => {
-  // Do we have a current timer?
-  const currentTimer = await client.timer.findFirst({ where: { endTime: null }})
-  if (currentTimer && false)
-    throw new Error('User already has a running timer.')
+const startTimer = (_parent, { input: data }, context) =>
+  guard([isAuthenticated()], context).then(async () => {
+    const { user, pubsub } = context
 
-  // Create the timer
-  const { timer } = await client.timer
-    .create({ data: { projectID: undefined, ...data, ownerID: user.id }})
-    .then(timer => ({ timer }))
-  
-  // Publish new timer on subs
-  pubsub.publish('CURRENT_TIMER', { myCurrentTimer: timer })
+    // Do we have a current timer?
+    const currentTimer = await prisma.timer.findFirst({ where: { endTime: null }})
+    if (currentTimer && false)
+      throw new Error('User already has a running timer.')
 
-  return { timer }
-}
+    // Create the timer
+    const { timer } = await prisma.timer
+      .create({ data: { projectID: undefined, ...data, ownerID: user.id }})
+      .then(timer => ({ timer }))
+    
+    // Publish new timer on subs
+    pubsub.publish('CURRENT_TIMER', { myCurrentTimer: timer })
 
-const stopTimer = async (_parent, { input: { id, ...data } }, context) => {
-  const { timer } = await client.timer
-    .update({ where: { id }, data })
-    .then(timer => ({ timer }))
+    return { timer }
+  })
 
-  // Publish null timer to reset current timer
-  context.pubsub.publish('CURRENT_TIMER', { myCurrentTimer: null  })
+const stopTimer = (_parent, { input: { id, ...data } }, context) =>
+  guard([isMyTimer(id)], context).then(async () => {
+    const { timer } = await prisma.timer
+      .update({ where: { id }, data })
+      .then(timer => ({ timer }))
 
-  return { timer }
-}
+    // Publish null timer to reset current timer
+    context.pubsub.publish('CURRENT_TIMER', { myCurrentTimer: null  })
 
-const updateTimer = async (_parent, { input: { id, ...data }}) =>
-  client.timer
-    .update({ where: { id }, data})
-    .then(timer => ({ timer }))
+    return { timer }
+  })
 
-const deleteTimer = async (_parent, { input: { id }}) =>
-  client.timer
-    .delete({ where: { id }})
-    .then(timer => ({ timer }))
+const updateTimer = (_parent, { input: { id, ...data }}, context) =>
+  guard([isMyTimer(id)], context).then(() => 
+    prisma.timer
+      .update({ where: { id }, data})
+      .then(timer => ({ timer })))
+
+const deleteTimer = (_parent, { input: { id }}, context) =>
+  guard([isMyTimer(id)], context).then(() => 
+    prisma.timer
+      .delete({ where: { id }})
+      .then(timer => ({ timer })))
 
 const timerMutatations = {
   startTimer,

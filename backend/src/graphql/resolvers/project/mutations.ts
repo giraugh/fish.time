@@ -1,31 +1,42 @@
-import client from 'client'
+import prisma from 'db/client'
+import { guard, isMyProject } from 'utils/guards'
 
 const createProject = async (_parent, { input: data }, { user }) => {
   // Create project
-  const project = await client.project.create({ data })
+  const project = await prisma.project.create({ data })
 
   // Add ourselves as owner
-  await client.usersInProject.create({ data: { userID: user.id, projectID: project.id }})
+  await prisma.usersInProject.create({ data: { userID: user.id, projectID: project.id, isOwner: true }})
 
   // Return the project payload
   return { project }
 }
 
-const updateProject = async (_parent, { input: { id, ...data }}) =>
-  client.project
+const updateProject = async (_parent, { input: { id, ...data }}, context) =>
+  guard([isMyProject(id)], context)
+  .then(() => prisma.project
     .update({ where: { id }, data})
-    .then(project => ({ project }))
+    .then(project => ({ project })))
 
-const deleteProject = async (_parent, { input: { id }}) =>
-  client.project
-    .delete({ where: { id }})
-    .then(project => ({ project }))
+const deleteProject = async (_parent, { input: { id }}, context) =>
+  guard([isMyProject(id)], context)
+  .then(async () => {
+    // Remove users from project
+    await prisma.usersInProject
+      .deleteMany({ where: { projectID: id }})
 
-const shareProject = async (_parent, { input: { id, userID }}) => 
-  client.usersInProject
+    // Delete project
+    await prisma.project
+      .delete({ where: { id }})
+      .then(project => ({ project }))
+  })
+
+const shareProject = async (_parent, { input: { id, userID }}, context) => 
+  guard([isMyProject(id)], context)
+  .then(() => prisma.usersInProject
     .create({ data: { projectID: id, userID } })
-    .then(() => client.project.findUnique({ where: { id }}))
-    .then(project => ({ project }))
+    .then(() => prisma.project.findUnique({ where: { id }}))
+    .then(project => ({ project })))
 
 const projectMutatations = {
   createProject,

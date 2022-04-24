@@ -39,9 +39,16 @@ const Input = styled('input', forwardRef)`
   }
 `
 
-const Field = forwardRef(({ label, ...props }, ref) => <Wrapper>
+const ErrorSpan = styled('span')`
+  display: block;
+  margin-block-start: .3em;
+  color: red;
+`
+
+const Field = forwardRef(({ label, error, ...props }, ref) => <Wrapper>
   {label && <Label htmlFor={props.id} $required={props?.required}>{label}</Label>}
   <Input id={props.id ?? props.name} ref={ref} {...props} />
+  {error && <ErrorSpan>{error}</ErrorSpan>}
 </Wrapper>)
 
 Field.Wrapper = Wrapper

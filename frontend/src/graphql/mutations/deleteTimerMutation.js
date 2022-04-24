@@ -5,10 +5,7 @@ const DELETE_TIMER_MUTATION = `
   mutation DeleteTimer($input: DeleteTimerInput!) {
     deleteTimer(input: $input) {
       timer {
-        ...TimerFields 
-        project {
-          ...ProjectFields
-        }
+        id
       }
     }
   }

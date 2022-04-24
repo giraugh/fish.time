@@ -7,7 +7,7 @@ const WAVE_HEIGHT = 100
 const SHOW_DEBUG = false
 const WAVE_COUNT = 4
 
-const Waves = ({ active = false }) => {
+const Waves = ({ active = false, decorative = false, sticky=true }) => {
   const svgRef = useRef()
   const [pageWidth, setPageWidth] = useState(0)
   const timerActive = useTimerStore(s => s.timerActive)
@@ -36,7 +36,7 @@ const Waves = ({ active = false }) => {
              `L${pageWidth} ${WAVE_HEIGHT * 2}` +
              `L${0} ${WAVE_HEIGHT * 2}`
 
-  return <Svg width={pageWidth} height={3 * WAVE_HEIGHT} ref={svgRef} $active={timerActive}>
+  return <Svg width={pageWidth} height={3 * WAVE_HEIGHT} ref={svgRef} $active={timerActive || active} $sticky={sticky}>
     <defs>
       <linearGradient id="wave-gradient" gradientTransform="rotate(90)">
         <stop offset="5%" stopColor="var(--clr-waves-bright)" />

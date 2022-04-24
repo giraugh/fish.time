@@ -1,17 +1,20 @@
 import { NavLink } from 'react-router-dom'
 
-import { Logo, Waves } from '/src/components'
-import { PageMain, ActionButton, Heading, ContentContainer } from './homeStyle'
+import { Logo, Waves, Onboarding } from '/src/components'
+import { Vertical } from './homeStyle'
 
-const Home = () => <PageMain>
-  <ContentContainer>
-    <Heading>
+const Home = () => <Onboarding.Main>
+  <Onboarding.Content>
+    <Onboarding.Heading>
       <Logo />
       <h1>Fish Time</h1>
-    </Heading>
-    <NavLink to='/app/'><ActionButton>Let&apos;s Get Tracking!</ActionButton></NavLink>
-  </ContentContainer>
+    </Onboarding.Heading>
+    <Vertical>
+      <NavLink to='/signup/'><Onboarding.Button>Let&apos;s Get Tracking!</Onboarding.Button></NavLink>
+      <NavLink to='/login/'>I already have an account</NavLink>
+    </Vertical>
+  </Onboarding.Content>
   <Waves active />
-</PageMain>
+</Onboarding.Main>
 
 export default Home

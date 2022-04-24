@@ -1,4 +1,5 @@
 import { styled } from 'goober'
+import { mobileBP } from '/src/styles/breakpoints'
 
 export const Container = styled('div')`
   display: flex;
@@ -6,7 +7,7 @@ export const Container = styled('div')`
   gap: 1em;
   padding: 1em;
 
-  @media (max-width: 650px) {
+  @media (max-width: ${mobileBP}) {
     padding: .5em;
   }
 `
@@ -38,7 +39,7 @@ export const ProjectRow = styled('div')`
     padding-right: 1em;
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: ${mobileBP}) {
 
   }
 `

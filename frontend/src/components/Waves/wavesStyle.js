@@ -1,8 +1,8 @@
 import { forwardRef } from 'react'
 import { styled } from 'goober'
+import { mobileBP } from '/src/styles/breakpoints'
 
 export const Svg = styled('svg', forwardRef)`
-  position: fixed;
   left: 0;
   width: 100%;
   height: min-content;
@@ -12,12 +12,16 @@ export const Svg = styled('svg', forwardRef)`
 
   transition: bottom .5s, opacity .5s;
 
+  ${p => p.$sticky && `
+    position: fixed;
+  `}
+
   ${p => p.$active && `
     bottom: -20px; 
     opacity: 1;
   `}
   
-  @media (max-width: 650px) {
+  @media (max-width: ${mobileBP}) {
     bottom: -50px;
 
     ${p => p.$active && `

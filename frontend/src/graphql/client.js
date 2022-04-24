@@ -1,6 +1,6 @@
 import { pipe, tap } from 'wonka'
 import { createClient, dedupExchange, subscriptionExchange } from 'urql'
-import { createClient as createWSClient } from 'graphql-ws'
+//import { createClient as createWSClient } from 'graphql-ws'
 import { gql } from '@urql/core'
 import { multipartFetchExchange } from '@urql/exchange-multipart-fetch'
 import { offlineExchange } from '@urql/exchange-graphcache'
@@ -8,6 +8,7 @@ import { makeDefaultStorage } from '@urql/exchange-graphcache/default-storage'
 
 import config from '/src/config'
 import { contextExchange } from '/src/utils'
+import { createToken } from '/src/auth'
 
 const cacheUpdates = {
   Mutation: {
@@ -41,6 +42,17 @@ const cacheUpdates = {
       }`
       cache.updateQuery({ query }, data => {
         data.myTimers = data.myTimers.filter(t => t.id !== result.deleteTimer?.timer.id)
+        return data
+      })
+    },
+    deleteClient: (result, _args, cache, _info) => {
+      const query = gql`{
+        myClients {
+          id
+        }
+      }`
+      cache.updateQuery({ query }, data => {
+        data.myClients = data.myClients.filter(t => t.id !== result.deleteClient?.client.id)
         return data
       })
     },
@@ -81,18 +93,18 @@ export const cacheExchange = offlineExchange({
   }
 })
 
-// Web socket client
-const wsClient = createWSClient({
-  url: config.WSAPI,
-})
-
-const subExchange = subscriptionExchange({
-  forwardSubscription: operation => ({
-    subscribe: sink => ({
-      unsubscribe: wsClient.subscribe(operation, sink),
-    }),
-  })
-}) 
+// // Web socket client
+// const wsClient = createWSClient({
+//   url: config.WSAPI,
+// })
+// 
+// const subExchange = subscriptionExchange({
+//   forwardSubscription: operation => ({
+//     subscribe: sink => ({
+//       unsubscribe: wsClient.subscribe(operation, sink),
+//     }),
+//   })
+// }) 
 
 const client = createClient({
   url: config.API,
@@ -101,11 +113,11 @@ const client = createClient({
     dedupExchange,
     contextExchange(async ctx => ({
       ...ctx,
-      /* #TODO: fetchOptions: { headers: { authorization: await createToken() } } */
+      fetchOptions: { headers: { authorization: await createToken() } } 
     })),
     errorExchange,
     cacheExchange,
-    subExchange,
+//    subExchange,
     multipartFetchExchange
   ]
 })

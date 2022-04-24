@@ -1,4 +1,5 @@
 import { styled } from 'goober'
+import { mobileBP } from '/src/styles/breakpoints'
 
 export const Container = styled('div')`
   display: flex;
@@ -6,7 +7,7 @@ export const Container = styled('div')`
   gap: 1em;
   padding: 1em;
 
-  @media (max-width: 650px) {
+  @media (max-width: ${mobileBP}) {
     padding: .5em;
   }
 `
@@ -35,11 +36,15 @@ export const ClientCard = styled('div')`
   padding-right: .5em;
   font-size: 1.4rem;
   min-width: 14em;
-  height: 3em;
+  padding-block: .5em;
 
   background: var(--clr-surface);
   color: var(--clr-white);
   border-radius: var(--border-radius);
+
+  @media (max-width: ${mobileBP}) {
+    width: 100%;
+  }
 `
 
 export const ClientListContainer = styled('div')`

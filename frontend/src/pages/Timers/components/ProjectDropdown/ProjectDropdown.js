@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { Box } from 'lucide-react'
 
-import { Dropdown } from '/src/components'
+import { Dropdown, DropdownIconButton } from '/src/components'
 import { projectColors } from '/src/utils/colors'
 import { useGroupedProjects } from '/src/hooks'
 
-import { ProjectRow, ProjectGroup, GroupContainer, DropdownButton, Value } from './projectDropdownStyle'
+import { ProjectRow, ProjectGroup, GroupContainer } from './projectDropdownStyle'
 
 const ProjectDropdown = ({ value=null, onChange }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -20,7 +20,7 @@ const ProjectDropdown = ({ value=null, onChange }) => {
     isOpen={isOpen}
     onClose={() => { setIsOpen(false); setFilter('') }}
     openButton={
-      <ProjectButton
+      <DropdownIconButton
         color={value && projectColors[value?.id % projectColors.length]}
         value={value?.name}
         icon={<Box size={35} />}
@@ -58,12 +58,5 @@ const ProjectDropdown = ({ value=null, onChange }) => {
     </>}
   </Dropdown>
 }
-
-const ProjectButton = ({ color, value, isOpen, setIsOpen, icon }) => 
-  <DropdownButton $color={color} $set={value} $isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
-    {icon}
-    <Value>{value}</Value>
-  </DropdownButton>
-
 
 export default ProjectDropdown

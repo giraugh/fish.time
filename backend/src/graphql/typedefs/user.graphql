@@ -13,6 +13,7 @@ type UserPayload { user: User! }
 type User {
   id: ID!
   displayName: String!
+  email: String!
   projects(isOwner: Boolean): [Project!]!
   clients: [Client!]!
   timers: [Timer!]!
@@ -20,12 +21,14 @@ type User {
 
 input CreateUserInput {
   id: ID!
+  email: String!
   displayName: String!
 }
 
 input UpdateUserInput {
   id: ID!
   displayName: String
+  email: String
 }
 
 input DeleteUserInput {

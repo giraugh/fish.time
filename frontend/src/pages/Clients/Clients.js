@@ -1,8 +1,10 @@
-import { useQuery } from 'urql'
-import { Plus, MoreVertical } from 'lucide-react'
+import { useState } from 'react'
+import { useQuery, useMutation } from 'urql'
+import { Plus, MoreVertical, Pencil, Trash } from 'lucide-react'
 
 import { GET_MY_CLIENTS_QUERY } from '/src/graphql/queries'
-import { Spinner, ScrollContainer, IconButton, Button, PageHeading } from '/src/components'
+import { DELETE_CLIENT_MUTATION } from '/src/graphql/mutations'
+import { Spinner, ScrollContainer, IconButton, Button, PageHeading, Dropdown } from '/src/components'
 
 import { CreateClientModal } from './pages'
 import {
@@ -32,10 +34,25 @@ const Clients = () => {
   </Container>
 }
 
-const Client = ({ name }) => {
+const Client = ({ id, name }) => {
+  const [menuIsOpen, setMenuIsOpen] = useState(false)
+
+  const [, deleteClient] = useMutation(DELETE_CLIENT_MUTATION)
+  const handleDeleteClient = () => {
+    deleteClient({ input: { id }})
+  }
+
   return <ClientCard>
     {name}
-    <IconButton icon={<MoreVertical />} size={40} />
+    <Dropdown
+        openButton={<IconButton onClick={() => setMenuIsOpen(!menuIsOpen)} subtle size={35} icon={<MoreVertical />}/>} 
+        isOpen={menuIsOpen}
+        onClose={() => setMenuIsOpen(false)}
+        small
+      >
+        <Button disabled subtle icon={<Pencil />}>Edit</Button>
+        <Button danger icon={<Trash />} onClick={() => { handleDeleteClient(); setMenuIsOpen(false) }}>Delete</Button>
+    </Dropdown>
   </ClientCard>
 }
 

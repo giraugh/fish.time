@@ -3,5 +3,7 @@ export const PROJECT_FRAGMENT = `
     id
     name
     totalDuration
+    isShared
+    isMine
   }
 `
