@@ -17,7 +17,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Write firebase config
-      run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}" > config/firebase_service_account.json
+      run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}" > src/config/firebase_service_account.json
 
     - name: Generate deployment package
       run: zip -r deploy.zip . -x '*.git*' -x '*node_modules*' -x '*dist*'
