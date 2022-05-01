@@ -1,12 +1,7 @@
 import admin from 'firebase-admin'
-import { FIREBASE_SERVICE_ACCOUNT } from './env'
 
-// We must have a config
-if (!FIREBASE_SERVICE_ACCOUNT)
-  throw Error('Expected FIREBASE_CONFIG env var to be set')
-
-// Read JSON string of service from env
-const firebaseConfig = JSON.parse(FIREBASE_SERVICE_ACCOUNT)
+// Read config from json (not commited)
+const firebaseConfig = require('./firebase_service_account.json')
 
 // Initialise firebase connection
 admin.initializeApp({
