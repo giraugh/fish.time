@@ -2,7 +2,7 @@ name: Deploy Backend to Beanstalk
 on:
   push:
     branches:
-      - main
+      - dev
 
 defaults:
   run:
