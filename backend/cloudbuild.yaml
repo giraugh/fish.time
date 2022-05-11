@@ -25,6 +25,9 @@ steps:
     # Database
     - 'DATABASE_URL="${_DATABASE_URL}"'
 
+    # Functions
+    - 'LAMBDA_KEY="${_LAMBDA_KEY}"'
+
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: gcloud
   args: ['app', 'deploy', '--version=v1']
