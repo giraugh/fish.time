@@ -1,0 +1,24 @@
+steps:
+- name: 'node:16.6.2'
+  entrypoint: yarn
+  args: ['install', '--immutable']
+  dir: frontend
+
+- name: 'node:16.6.2'
+  entrypoint: yarn
+  args: ['build']
+  dir: frontend
+  env:
+  - 'REACT_APP_ENV=${_REACT_APP_ENV}'
+  - 'PUBLIC_URL=${_PUBLIC_URL}'
+
+- name: 'node:16.6.2'
+  entrypoint: bash
+  args: ['-c', 'cp app.yaml dist/app.yaml']
+  dir: frontend
+
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: gcloud
+  args: ['app', 'deploy', '--version=v1']
+  dir: frontend/dist
+timeout: '1600s'
