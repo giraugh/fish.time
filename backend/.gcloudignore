@@ -1,0 +1,10 @@
+node_modules
+.env
+.env.production
+log
+.DS_Store
+.git
+.gitignore
+.gcloudignore
+dev-db.yaml
+cloud_sql_proxy

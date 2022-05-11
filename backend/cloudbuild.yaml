@@ -1,0 +1,34 @@
+# -- Cloudbuild Configuration -- 
+# -> Install deps
+# -> Create env from cloud build env vars
+# -> Deploy
+
+steps:
+- id: 'yarn-install'
+  name: 'node:16.6.2'
+  entrypoint: yarn
+  args: ['install', '--immutable']
+  dir: backend
+
+- name: 'node:16.6.2'
+  entrypoint: yarn
+  args: ['create-env']
+  dir: backend
+  env:
+    # Static
+    - 'NODE_ENV=production'
+    - 'BABEL_DISABLE_CACHE=true'
+
+    # GCP
+    - 'PROJECT_ID="${PROJECT_ID}"'
+    - 'BUCKET_NAME="${_BUCKET_NAME}"'
+
+    # Database
+    - 'DATABASE_URL="${_DATABASE_URL}"'
+
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: gcloud
+  args: ['app', 'deploy', '--version=v1']
+  dir: backend
+
+timeout: '1600s'
