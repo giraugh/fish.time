@@ -1,11 +1,14 @@
 import admin from 'firebase-admin'
+import { env, GOOGLE_APPLICATION_CREDENTIALS } from './env'
 
-// Read config from json (not commited)
-const firebaseConfig = require('./firebase_service_account.json')
 
 // Initialise firebase connection
-admin.initializeApp({
-  credential: admin.credential.cert(firebaseConfig),
-})
+if (env === 'production') {
+  admin.initializeApp()
+} else {
+  admin.initializeApp({
+    credential: admin.credential.cert(GOOGLE_APPLICATION_CREDENTIALS),
+  })
+}
 
 export default admin

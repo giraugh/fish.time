@@ -12,3 +12,4 @@ if (env === 'production') {
 
 export const PORT = process.env.PORT || 6001
 export const LAMBDA_KEY = process.env.LAMBDA_KEY as string
+export const GOOGLE_APPLICATION_CREDENTIALS = process.env.GOOGLE_APPLICATION_CREDENTIALS ?? './firebase_service_account.json'
