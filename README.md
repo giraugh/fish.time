@@ -1,2 +1,2 @@
-# time.fish
-Simple Time Tracker Application for RMIT Cloud Computing project
+# 🐟 Fish.Time
+A Simple Time Tracker Webapp created in React
